@@ -101,12 +101,12 @@ export function Navbar() {
               <Link
                 to={link.to}
                 activeOptions={{ exact: link.to === "/" }}
-                className="flex items-center justify-between rounded-xl px-4 py-3 text-base font-medium text-muted-foreground transition-colors hover:bg-muted data-[status=active]:bg-muted data-[status=active]:text-foreground"
+                className="group flex items-center justify-between rounded-xl px-4 py-3 text-base font-medium text-muted-foreground transition-colors hover:bg-muted data-[status=active]:bg-muted data-[status=active]:text-foreground"
               >
                 {link.label}
                 <span
                   aria-hidden="true"
-                  className="size-1.5 rounded-full bg-gold opacity-0 transition-opacity [a[data-status=active]_&]:opacity-100"
+                  className="size-1.5 rounded-full bg-gold opacity-0 transition-opacity group-data-[status=active]:opacity-100"
                 />
               </Link>
             </li>
