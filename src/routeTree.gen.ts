@@ -21,6 +21,7 @@ import { Route as MinistriesRouteImport } from './routes/ministries'
 import { Route as PrayerRouteImport } from './routes/prayer'
 import { Route as SermonsRouteImport } from './routes/sermons'
 import { Route as AdminHomepageRouteImport } from './routes/admin.homepage'
+import { Route as AdminLeadershipRouteImport } from './routes/admin.leadership'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 
 const IndexRoute = IndexRouteImport.update({
@@ -83,6 +84,11 @@ const AdminHomepageRoute = AdminHomepageRouteImport.update({
   path: '/homepage',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminLeadershipRoute = AdminLeadershipRouteImport.update({
+  id: '/leadership',
+  path: '/leadership',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -102,6 +108,7 @@ export interface FileRoutesByFullPath {
   '/prayer': typeof PrayerRoute
   '/sermons': typeof SermonsRoute
   '/admin/homepage': typeof AdminHomepageRoute
+  '/admin/leadership': typeof AdminLeadershipRoute
   '/admin/login': typeof AdminLoginRoute
 }
 export interface FileRoutesByTo {
@@ -117,6 +124,7 @@ export interface FileRoutesByTo {
   '/prayer': typeof PrayerRoute
   '/sermons': typeof SermonsRoute
   '/admin/homepage': typeof AdminHomepageRoute
+  '/admin/leadership': typeof AdminLeadershipRoute
   '/admin/login': typeof AdminLoginRoute
 }
 export interface FileRoutesById {
@@ -133,6 +141,7 @@ export interface FileRoutesById {
   '/prayer': typeof PrayerRoute
   '/sermons': typeof SermonsRoute
   '/admin/homepage': typeof AdminHomepageRoute
+  '/admin/leadership': typeof AdminLeadershipRoute
   '/admin/login': typeof AdminLoginRoute
 }
 export interface FileRouteTypes {
@@ -150,6 +159,7 @@ export interface FileRouteTypes {
     | '/prayer'
     | '/sermons'
     | '/admin/homepage'
+    | '/admin/leadership'
     | '/admin/login'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -165,6 +175,7 @@ export interface FileRouteTypes {
     | '/prayer'
     | '/sermons'
     | '/admin/homepage'
+    | '/admin/leadership'
     | '/admin/login'
   id:
     | '__root__'
@@ -180,6 +191,7 @@ export interface FileRouteTypes {
     | '/prayer'
     | '/sermons'
     | '/admin/homepage'
+    | '/admin/leadership'
     | '/admin/login'
   fileRoutesById: FileRoutesById
 }
@@ -283,6 +295,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminHomepageRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/leadership': {
+      id: '/admin/leadership'
+      path: '/leadership'
+      fullPath: '/admin/leadership'
+      preLoaderRoute: typeof AdminLeadershipRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/login': {
       id: '/admin/login'
       path: '/login'
@@ -295,11 +314,13 @@ declare module '@tanstack/react-router' {
 
 interface AdminRouteChildren {
   AdminHomepageRoute: typeof AdminHomepageRoute
+  AdminLeadershipRoute: typeof AdminLeadershipRoute
   AdminLoginRoute: typeof AdminLoginRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminHomepageRoute: AdminHomepageRoute,
+  AdminLeadershipRoute: AdminLeadershipRoute,
   AdminLoginRoute: AdminLoginRoute,
 }
 
