@@ -32,7 +32,14 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { useAdminAuth } from "@/admin/auth";
 
-export const adminNav = [
+interface AdminNavItem {
+  label: string;
+  to: string;
+  icon: typeof LayoutDashboard;
+  exact?: boolean;
+}
+
+export const adminNav: AdminNavItem[] = [
   { label: "Dashboard", to: "/admin", icon: LayoutDashboard, exact: true },
   { label: "Homepage", to: "/admin/homepage", icon: Sparkles },
   { label: "Leadership", to: "/admin/leadership", icon: Users },
@@ -45,7 +52,7 @@ export const adminNav = [
   { label: "Messages", to: "/admin/messages", icon: Inbox },
   { label: "Subscribers", to: "/admin/subscribers", icon: Mail },
   { label: "Settings", to: "/admin/settings", icon: SettingsIcon },
-] as const;
+];
 
 const notifications = [
   { title: "New prayer request", body: "Adaeze N. submitted a healing request.", time: "2h ago" },
