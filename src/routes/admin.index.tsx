@@ -49,7 +49,7 @@ function DashboardPage() {
     void Promise.all(keys.map((k) => db.list(k))).then((results) => {
       if (!active) return;
       const next: Partial<Record<CollectionKey, BaseRecord[]>> = {};
-      keys.forEach((k, i) => (next[k] = results[i]));
+      keys.forEach((k, i) => (next[k] = results[i] ?? []));
       setData(next);
       setLoading(false);
     });

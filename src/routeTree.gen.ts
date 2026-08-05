@@ -20,6 +20,7 @@ import { Route as LeadershipRouteImport } from './routes/leadership'
 import { Route as MinistriesRouteImport } from './routes/ministries'
 import { Route as PrayerRouteImport } from './routes/prayer'
 import { Route as SermonsRouteImport } from './routes/sermons'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminAnnouncementsRouteImport } from './routes/admin.announcements'
 import { Route as AdminEventsRouteImport } from './routes/admin.events'
 import { Route as AdminGalleryRouteImport } from './routes/admin.gallery'
@@ -30,6 +31,7 @@ import { Route as AdminMessagesRouteImport } from './routes/admin.messages'
 import { Route as AdminMinistriesRouteImport } from './routes/admin.ministries'
 import { Route as AdminPrayerRouteImport } from './routes/admin.prayer'
 import { Route as AdminSermonsRouteImport } from './routes/admin.sermons'
+import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
 import { Route as AdminSubscribersRouteImport } from './routes/admin.subscribers'
 
 const IndexRoute = IndexRouteImport.update({
@@ -87,6 +89,11 @@ const SermonsRoute = SermonsRouteImport.update({
   path: '/sermons',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminAnnouncementsRoute = AdminAnnouncementsRouteImport.update({
   id: '/announcements',
   path: '/announcements',
@@ -137,6 +144,11 @@ const AdminSermonsRoute = AdminSermonsRouteImport.update({
   path: '/sermons',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminSubscribersRoute = AdminSubscribersRouteImport.update({
   id: '/subscribers',
   path: '/subscribers',
@@ -165,12 +177,13 @@ export interface FileRoutesByFullPath {
   '/admin/ministries': typeof AdminMinistriesRoute
   '/admin/prayer': typeof AdminPrayerRoute
   '/admin/sermons': typeof AdminSermonsRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/admin/subscribers': typeof AdminSubscribersRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/admin': typeof AdminRouteWithChildren
   '/contact': typeof ContactRoute
   '/events': typeof EventsRoute
   '/gallery': typeof GalleryRoute
@@ -189,7 +202,9 @@ export interface FileRoutesByTo {
   '/admin/ministries': typeof AdminMinistriesRoute
   '/admin/prayer': typeof AdminPrayerRoute
   '/admin/sermons': typeof AdminSermonsRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/admin/subscribers': typeof AdminSubscribersRoute
+  '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -214,7 +229,9 @@ export interface FileRoutesById {
   '/admin/ministries': typeof AdminMinistriesRoute
   '/admin/prayer': typeof AdminPrayerRoute
   '/admin/sermons': typeof AdminSermonsRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/admin/subscribers': typeof AdminSubscribersRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -240,12 +257,13 @@ export interface FileRouteTypes {
     | '/admin/ministries'
     | '/admin/prayer'
     | '/admin/sermons'
+    | '/admin/settings'
     | '/admin/subscribers'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
-    | '/admin'
     | '/contact'
     | '/events'
     | '/gallery'
@@ -264,7 +282,9 @@ export interface FileRouteTypes {
     | '/admin/ministries'
     | '/admin/prayer'
     | '/admin/sermons'
+    | '/admin/settings'
     | '/admin/subscribers'
+    | '/admin'
   id:
     | '__root__'
     | '/'
@@ -288,7 +308,9 @@ export interface FileRouteTypes {
     | '/admin/ministries'
     | '/admin/prayer'
     | '/admin/sermons'
+    | '/admin/settings'
     | '/admin/subscribers'
+    | '/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -384,6 +406,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SermonsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/announcements': {
       id: '/admin/announcements'
       path: '/announcements'
@@ -454,6 +483,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminSermonsRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/subscribers': {
       id: '/admin/subscribers'
       path: '/subscribers'
@@ -475,7 +511,9 @@ interface AdminRouteChildren {
   AdminMinistriesRoute: typeof AdminMinistriesRoute
   AdminPrayerRoute: typeof AdminPrayerRoute
   AdminSermonsRoute: typeof AdminSermonsRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
   AdminSubscribersRoute: typeof AdminSubscribersRoute
+  AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
@@ -489,7 +527,9 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminMinistriesRoute: AdminMinistriesRoute,
   AdminPrayerRoute: AdminPrayerRoute,
   AdminSermonsRoute: AdminSermonsRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
   AdminSubscribersRoute: AdminSubscribersRoute,
+  AdminIndexRoute: AdminIndexRoute,
 }
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
