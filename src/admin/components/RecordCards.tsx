@@ -53,7 +53,7 @@ export function RecordCards({
             key={row.id}
             className="group flex flex-col gap-3 overflow-hidden rounded-2xl border-border/70 p-0 shadow-soft transition-all duration-200 hover:-translate-y-0.5 hover:shadow-gold"
           >
-            {card.image ? (
+            {card.image && row[card.image] ? (
               <MediaThumb
                 value={row[card.image]}
                 alt={String(row[card.title] ?? "Image")}
@@ -69,10 +69,11 @@ export function RecordCards({
                       {String(row[card.eyebrow] ?? "—")}
                     </p>
                   ) : null}
-                  <h3 className="truncate font-display text-lg font-semibold text-navy">
+                  <h3 className="line-clamp-2 font-display text-lg leading-snug font-semibold text-navy">
                     {String(row[card.title] ?? "Untitled")}
                   </h3>
                 </div>
+
                 {badge ? (
                   <Badge className={cn("shrink-0 rounded-full border-none capitalize", tone(badge))}>
                     {badge}
