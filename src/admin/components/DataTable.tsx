@@ -17,6 +17,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
+import { MediaThumb } from "./MediaUpload";
+import { stripHtml } from "./RichTextEditor";
 import type { BaseRecord, ColumnConfig } from "@/admin/types";
 
 function formatDate(value: unknown) {
@@ -29,6 +31,16 @@ function formatDate(value: unknown) {
 function Cell({ column, row }: { column: ColumnConfig; row: BaseRecord }) {
   const value = row[column.name];
 
+  if (column.kind === "image") {
+    return <MediaThumb value={value} alt="" className="size-11" />;
+  }
+  if (column.kind === "html") {
+    return (
+      <span className="block max-w-70 truncate text-muted-foreground">
+        {stripHtml(value) || "—"}
+      </span>
+    );
+  }
   if (column.kind === "boolean") {
     return (
       <Badge
@@ -57,6 +69,7 @@ function Cell({ column, row }: { column: ColumnConfig; row: BaseRecord }) {
 
   return <span>{value === undefined || value === "" ? "—" : String(value)}</span>;
 }
+
 
 export function EmptyState({
   title,
