@@ -17,6 +17,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
+import { MediaThumb } from "./MediaUpload";
+import { stripHtml } from "./RichTextEditor";
 import type { BaseRecord, ColumnConfig } from "@/admin/types";
 
 function formatDate(value: unknown) {
