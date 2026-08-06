@@ -67,12 +67,39 @@ function DashboardPage() {
 
   return (
     <AdminShell>
-      <div>
-        <h1 className="font-display text-3xl font-semibold text-navy">Dashboard</h1>
-        <p className="mt-1 text-sm text-muted-foreground">
-          An overview of everything happening across the Rock Chapel website.
+      <section className="overflow-hidden rounded-3xl bg-navy p-6 text-primary-foreground shadow-soft sm:p-8">
+        <p className="text-xs font-medium tracking-[0.18em] text-gold uppercase">
+          Rock Chapel International
         </p>
-      </div>
+        <h1 className="mt-2 font-display text-2xl font-semibold sm:text-3xl">
+          Welcome back — here's your church at a glance
+        </h1>
+        <p className="mt-2 max-w-xl text-sm text-primary-foreground/75">
+          Everything on the public website is managed from here. Pick a card below, or use the
+          quick actions to add something new.
+        </p>
+        {!loading && (newPrayers > 0 || unread > 0) ? (
+          <div className="mt-5 flex flex-wrap gap-3">
+            {newPrayers > 0 ? (
+              <Link
+                to="/admin/prayer"
+                className="rounded-full bg-gold px-4 py-2 text-sm font-medium text-navy transition-transform hover:-translate-y-0.5"
+              >
+                {newPrayers} new prayer {newPrayers === 1 ? "request" : "requests"}
+              </Link>
+            ) : null}
+            {unread > 0 ? (
+              <Link
+                to="/admin/messages"
+                className="rounded-full border border-primary-foreground/30 px-4 py-2 text-sm font-medium transition-colors hover:bg-primary-foreground/10"
+              >
+                {unread} unread {unread === 1 ? "message" : "messages"}
+              </Link>
+            ) : null}
+          </div>
+        ) : null}
+      </section>
+
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <StatCard label="Sermons" value={count("sermons")} icon={Mic2} loading={loading} hint="Published archive" />
