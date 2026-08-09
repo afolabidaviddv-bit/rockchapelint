@@ -128,32 +128,22 @@ export const leaders = [
   {
     name: "Apostle Tunde Oke",
     role: "Founder & Presiding Apostle",
-    bio: "Set apart to raise a generation rooted in the Word, Apostle Oke has given decades to teaching, church planting and mentoring ministers across the region.",
+    bio: "Born in 1978, a Nigerian citizen, married with children. In 2002 he founded Rock Chapel International with a mandate for evangelism, miracles and discipleship — making men worthy of God's Kingdom.",
   },
   {
-    name: "Pastor (Mrs.) Grace Oke",
-    role: "Women & Family Life",
-    bio: "Oversees family life ministry, counselling and the Women of Grace fellowship with warmth and pastoral wisdom.",
+    name: "Pastoral Team Member",
+    role: "Role to be confirmed",
+    bio: "Placeholder profile — add this minister's name, role and biography from the admin dashboard.",
   },
   {
-    name: "Pastor Samuel Adewale",
-    role: "Resident Pastor, Agunbelewo",
-    bio: "Shepherds the Agunbelewo branch, leading discipleship classes and community outreach initiatives.",
+    name: "Pastoral Team Member",
+    role: "Role to be confirmed",
+    bio: "Placeholder profile — add this minister's name, role and biography from the admin dashboard.",
   },
   {
-    name: "Pastor Deborah Ilesanmi",
-    role: "Youth & Campus Ministry",
-    bio: "Guides teenagers and students through mentorship, career clinics and vibrant weekend gatherings.",
-  },
-  {
-    name: "Minister Joshua Ayinde",
-    role: "Worship Director",
-    bio: "Leads the worship and creative arts team, curating a sound that is both reverent and contemporary.",
-  },
-  {
-    name: "Deaconess Funmi Bello",
-    role: "Administration & Welfare",
-    bio: "Coordinates church operations, welfare support and the hospitality experience for every guest.",
+    name: "Pastoral Team Member",
+    role: "Role to be confirmed",
+    bio: "Placeholder profile — add this minister's name, role and biography from the admin dashboard.",
   },
 ];
 
