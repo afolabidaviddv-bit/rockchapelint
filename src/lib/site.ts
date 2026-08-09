@@ -159,7 +159,7 @@ export const sermons = [
   },
   {
     title: "Rooted, Not Rushed",
-    speaker: "Pastor Samuel Adewale",
+    speaker: "Guest Minister",
     series: "Growth",
     date: "July 19, 2026",
     duration: "41 min",
@@ -168,7 +168,7 @@ export const sermons = [
   },
   {
     title: "A House of Prayer",
-    speaker: "Pastor (Mrs.) Grace Oke",
+    speaker: "Apostle Tunde Oke",
     series: "Foundations",
     date: "July 12, 2026",
     duration: "37 min",
@@ -177,7 +177,7 @@ export const sermons = [
   },
   {
     title: "Purpose Over Pressure",
-    speaker: "Pastor Deborah Ilesanmi",
+    speaker: "Guest Minister",
     series: "Youth",
     date: "July 5, 2026",
     duration: "44 min",
@@ -194,7 +194,7 @@ export const sermons = [
   },
   {
     title: "Grace for the Ordinary Day",
-    speaker: "Minister Joshua Ayinde",
+    speaker: "Guest Minister",
     series: "Growth",
     date: "June 21, 2026",
     duration: "35 min",
