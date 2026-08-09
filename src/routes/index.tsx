@@ -1,7 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, CalendarDays, Clock, MapPin, Sparkles } from "lucide-react";
 import { pageMeta } from "@/lib/seo";
-import { site, ministries, events, sermons, testimonials } from "@/lib/site";
+import {
+  site,
+  ministries,
+  events,
+  sermons,
+  testimonials,
+  coreValues,
+  organizations,
+} from "@/lib/site";
 import { Button } from "@/components/Button";
 import { Reveal } from "@/components/Reveal";
 import { SectionTitle } from "@/components/SectionTitle";
@@ -14,9 +22,9 @@ import sanctuaryImg from "@/assets/about-sanctuary.jpg";
 export const Route = createFileRoute("/")({
   head: () =>
     pageMeta({
-      title: "Rock Chapel International — A Church Family in Agunbelewo",
+      title: "Rock Chapel International — Bringing Succour to Our Generation",
       description:
-        "Welcome to Rock Chapel International, founded by Apostle Timothy Olatunde Oke. Sunday service 9AM–12PM, Wednesday 4PM–6PM at BCGA and Agunbelewo.",
+        "Rock Chapel International, founded in 2002 by Apostle Tunde Oke. Sunday service 9:00 AM, Wednesday 4:00 PM at No. 10 Ajibade Street, BCGA, Osogbo, Osun State.",
       path: "/",
     }),
   component: Home,
@@ -42,14 +50,14 @@ function Home() {
           <div className="max-w-3xl">
             <p className="animate-fade-in inline-flex items-center gap-2 rounded-full border border-gold/40 bg-navy/40 px-4 py-2 text-xs tracking-[0.2em] text-gold uppercase backdrop-blur-sm">
               <Sparkles className="size-3.5" aria-hidden="true" />
-              Welcome home
+              {site.tagline}
             </p>
             <h1 className="animate-fade-in mt-6 font-display text-4xl leading-[1.05] font-semibold text-balance text-primary-foreground sm:text-6xl lg:text-7xl">
               Rock Chapel <span className="text-gradient-gold">International</span>
             </h1>
             <p className="animate-fade-in mt-6 max-w-xl text-base leading-relaxed text-primary-foreground/80 sm:text-lg">
-              A place of encounter, growth and purpose. Founded by {site.founder}, we gather week
-              after week to worship sincerely, study deeply and serve our community with love.
+              Founded in {site.founded} by {site.founder}, we are committed to evangelism,
+              miracles and discipleship — making men worthy of God's Kingdom.
             </p>
             <div className="animate-fade-in mt-9 flex flex-wrap gap-3">
               <Button asChild variant="gold" size="lg">
@@ -66,31 +74,56 @@ function Home() {
       </section>
 
       {/* Service times band */}
-      <section aria-label="Service times" className="border-b border-border bg-cream">
-        <div className="container-page grid gap-6 py-10 sm:grid-cols-2 lg:grid-cols-4">
+      <section aria-label="Service times and location" className="border-b border-border bg-cream">
+        <div className="container-page grid gap-6 py-10 sm:grid-cols-2 lg:grid-cols-3">
           {site.services.map((s, i) => (
             <Reveal key={s.day} delay={i * 80} className="flex items-start gap-3">
               <Clock className="mt-0.5 size-5 shrink-0 text-gold" aria-hidden="true" />
               <div className="min-w-0">
                 <p className="font-medium">{s.day}</p>
-                <p className="text-sm text-muted-foreground">{s.time}</p>
+                <p className="text-sm text-muted-foreground">
+                  {s.time} · {s.note}
+                </p>
               </div>
             </Reveal>
           ))}
           <Reveal delay={160} className="flex items-start gap-3">
             <MapPin className="mt-0.5 size-5 shrink-0 text-gold" aria-hidden="true" />
             <div className="min-w-0">
-              <p className="font-medium">Headquarters</p>
-              <p className="text-sm text-muted-foreground">{site.headquarters}</p>
+              <p className="font-medium">Church address</p>
+              <p className="text-sm text-muted-foreground">{site.address}</p>
             </div>
           </Reveal>
-          <Reveal delay={240} className="flex items-start gap-3">
-            <MapPin className="mt-0.5 size-5 shrink-0 text-gold" aria-hidden="true" />
-            <div className="min-w-0">
-              <p className="font-medium">Branch</p>
-              <p className="text-sm text-muted-foreground">{site.branch}</p>
-            </div>
-          </Reveal>
+        </div>
+      </section>
+
+      {/* Core values */}
+      <section className="py-20 lg:py-24">
+        <div className="container-page">
+          <SectionTitle
+            eyebrow="Core values"
+            title="What we live by"
+            description="Three convictions shape how we worship, serve and grow together."
+            align="center"
+          />
+          <div className="mt-14 grid gap-6 md:grid-cols-3">
+            {coreValues.map((v, i) => (
+              <Reveal key={v.title} delay={i * 90}>
+                <SurfaceCard className="h-full text-center">
+                  <span
+                    aria-hidden="true"
+                    className="mx-auto grid size-12 place-items-center rounded-2xl bg-navy font-display text-lg font-semibold text-gold"
+                  >
+                    {i + 1}
+                  </span>
+                  <h3 className="mt-5 font-display text-xl font-semibold">{v.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {v.description}
+                  </p>
+                </SurfaceCard>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -254,6 +287,59 @@ function Home() {
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Arms & organizations */}
+      <section className="py-20 lg:py-24">
+        <div className="container-page">
+          <SectionTitle
+            eyebrow="Our arms & organizations"
+            title="Ministry beyond our walls"
+            description="Extensions of the Rock Chapel International vision, serving our generation every day."
+            align="center"
+          />
+          <div className="mt-14 grid gap-6 md:grid-cols-2">
+            {organizations.map((o, i) => (
+              <Reveal key={o.title} delay={i * 90}>
+                <SurfaceCard className="h-full">
+                  <h3 className="font-display text-xl font-semibold">{o.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {o.description}
+                  </p>
+                </SurfaceCard>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Find us */}
+      <section className="bg-muted/50 py-20 lg:py-24">
+        <div className="container-page grid items-center gap-10 lg:grid-cols-2">
+          <div>
+            <SectionTitle
+              eyebrow="Find us"
+              title="Come and worship with us"
+              description={site.address}
+            />
+            <Reveal delay={120} className="mt-8">
+              <Button asChild variant="primary">
+                <Link to="/contact">
+                  Get directions <ArrowRight aria-hidden="true" />
+                </Link>
+              </Button>
+            </Reveal>
+          </div>
+          <Reveal delay={80}>
+            <iframe
+              title="Map showing Rock Chapel International"
+              src={`https://www.google.com/maps?q=${encodeURIComponent(site.mapQuery)}&output=embed`}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="h-80 w-full rounded-3xl border border-border/60 shadow-soft"
+            />
+          </Reveal>
         </div>
       </section>
 

@@ -1,9 +1,10 @@
 import type { FormEvent } from "react";
 import { Link } from "@tanstack/react-router";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { toast } from "sonner";
 import { navLinks, site } from "@/lib/site";
 import { Button } from "./Button";
+import logoMark from "@/assets/logo-mark.png";
 
 export function Footer() {
   const onSubscribe = (e: FormEvent<HTMLFormElement>) => {
@@ -29,30 +30,36 @@ export function Footer() {
         <div className="grid gap-12 lg:grid-cols-[1.3fr_1fr_1fr_1.2fr]">
           <div>
             <div className="flex items-center gap-3">
-              <span
+              <img
+                src={logoMark}
+                alt=""
                 aria-hidden="true"
-                className="grid size-11 place-items-center rounded-xl bg-gold font-display text-lg font-semibold text-navy"
-              >
-                R
-              </span>
+                loading="lazy"
+                width={44}
+                height={44}
+                className="size-11 rounded-xl"
+              />
               <span>
-                <span className="block font-display text-lg font-semibold">Rock Chapel</span>
-                <span className="block text-[0.6rem] tracking-[0.22em] text-primary-foreground/60 uppercase">
-                  International
+                <span className="block font-display text-lg font-semibold">
+                  Rock Chapel International
+                </span>
+                <span className="block text-[0.6rem] tracking-[0.18em] text-primary-foreground/60 uppercase">
+                  {site.tagline}
                 </span>
               </span>
             </div>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-primary-foreground/70">
-              {site.tagline} Founded by {site.founder}, we exist to see lives transformed by the
-              Word and empowered for purpose.
+              Founded in {site.founded} by {site.founder}, Rock Chapel International is committed to
+              evangelism, miracles and discipleship — making men worthy of God's Kingdom.
             </p>
             <ul className="mt-6 flex flex-wrap gap-2">
               {site.socials.map((s) => (
                 <li key={s.label}>
                   <a
-                    href={s.href}
-                    aria-label={s.label}
-                    className="inline-flex h-9 items-center rounded-full border border-primary-foreground/20 px-4 text-xs tracking-wide transition-colors hover:border-gold hover:text-gold"
+                    href={s.href || undefined}
+                    aria-label={s.href ? s.label : `${s.label} — link coming soon`}
+                    aria-disabled={s.href ? undefined : true}
+                    className="inline-flex h-9 items-center rounded-full border border-primary-foreground/20 px-4 text-xs tracking-wide transition-colors hover:border-gold hover:text-gold aria-disabled:opacity-50"
                   >
                     {s.label}
                   </a>
@@ -101,16 +108,29 @@ export function Footer() {
             <ul className="mt-5 space-y-3 text-sm text-primary-foreground/70">
               <li className="flex gap-3">
                 <MapPin className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden="true" />
-                <span>
-                  {site.headquarters}
-                  <br />
-                  {site.branch}
-                </span>
+                <span>{site.address}</span>
               </li>
               <li className="flex gap-3">
                 <Phone className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden="true" />
-                <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="hover:text-gold">
-                  {site.phone}
+                <span>
+                  <a href={`tel:${site.phone}`} className="hover:text-gold">
+                    {site.phone}
+                  </a>
+                  {" · "}
+                  <a href={`tel:${site.phoneAlt}`} className="hover:text-gold">
+                    {site.phoneAlt}
+                  </a>
+                </span>
+              </li>
+              <li className="flex gap-3">
+                <MessageCircle className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden="true" />
+                <a
+                  href={`https://wa.me/${site.whatsapp}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-gold"
+                >
+                  Chat on WhatsApp
                 </a>
               </li>
               <li className="flex gap-3">

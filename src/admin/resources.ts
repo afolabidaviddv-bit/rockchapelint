@@ -164,6 +164,13 @@ export const sermonsResource: ResourceConfig = {
     { name: "speaker", label: "Speaker", type: "text", required: true, group: "Message" },
     { name: "series", label: "Series", type: "text", group: "Message" },
     {
+      name: "scripture",
+      label: "Scripture reference",
+      type: "text",
+      placeholder: "Psalm 62:1-8",
+      group: "Message",
+    },
+    {
       name: "date",
       label: "Date preached",
       type: "text",
@@ -180,6 +187,15 @@ export const sermonsResource: ResourceConfig = {
       folder: "sermons",
       accept: "audio/*,video/*",
       help: "Drop an MP3 or MP4 here — up to 20 MB",
+      group: "Media",
+    },
+    {
+      name: "pdf_url",
+      label: "Sermon notes (PDF)",
+      type: "media",
+      folder: "sermons",
+      accept: "application/pdf",
+      help: "Drop a PDF of the message notes — up to 20 MB",
       group: "Media",
     },
     {

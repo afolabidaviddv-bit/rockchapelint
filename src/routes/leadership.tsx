@@ -12,7 +12,7 @@ export const Route = createFileRoute("/leadership")({
     pageMeta({
       title: "Leadership — Rock Chapel International",
       description:
-        "Meet Apostle Timothy Olatunde Oke and the pastoral team shepherding Rock Chapel International across BCGA and Agunbelewo.",
+        "Meet Apostle Tunde Oke and the pastoral team shepherding Rock Chapel International across BCGA and Agunbelewo.",
       path: "/leadership",
     }),
   component: Leadership,
@@ -49,13 +49,13 @@ function Leadership() {
             />
             <Reveal delay={120} className="mt-6 space-y-4 text-muted-foreground">
               <p>
-                Known for teaching that is both scholarly and deeply practical, Apostle Oke has
-                spent decades raising ministers, planting churches and championing community
-                development.
+                Apostle Tunde Oke was born in 1978, is a citizen of Nigeria, and is married with
+                children. In 2002 he founded Rock Chapel International.
               </p>
               <p>
-                He leads Rock Chapel International alongside a devoted pastoral team across the
-                {" "}{site.headquarters} and {site.branch}.
+                He leads the church from {site.headquarters}, with ministry reaching{" "}
+                {site.branch} and beyond through evangelism, miracles and discipleship. This
+                biography can be updated at any time from the admin dashboard.
               </p>
             </Reveal>
           </div>

@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { navLinks, site } from "@/lib/site";
 import { Button } from "./Button";
+import logoMark from "@/assets/logo-mark.png";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -37,18 +38,20 @@ export function Navbar() {
     >
       <div className="container-page grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4">
         <Link to="/" className="flex min-w-0 items-center gap-3" aria-label={`${site.name} home`}>
-          <span
+          <img
+            src={logoMark}
+            alt=""
             aria-hidden="true"
-            className="grid size-10 shrink-0 place-items-center rounded-xl bg-navy font-display text-lg font-semibold text-gold shadow-soft"
-          >
-            R
-          </span>
+            width={40}
+            height={40}
+            className="size-10 shrink-0 rounded-xl shadow-soft"
+          />
           <span className="min-w-0">
             <span className="block truncate font-display text-base leading-tight font-semibold sm:text-lg">
-              Rock Chapel
+              Rock Chapel International
             </span>
-            <span className="block text-[0.6rem] tracking-[0.22em] text-muted-foreground uppercase">
-              International
+            <span className="block truncate text-[0.6rem] tracking-[0.18em] text-muted-foreground uppercase">
+              {site.tagline}
             </span>
           </span>
         </Link>

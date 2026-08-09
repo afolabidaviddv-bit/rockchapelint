@@ -85,7 +85,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Rock Chapel International — a warm, Word-centred church family founded by Apostle Timothy Olatunde Oke.",
+          "Rock Chapel International — a warm, Word-centred church family founded by Apostle Tunde Oke.",
       },
       { name: "author", content: "Rock Chapel International" },
       { property: "og:site_name", content: "Rock Chapel International" },
@@ -100,7 +100,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap",
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
     ],
     scripts: [
       {
@@ -109,7 +109,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@context": "https://schema.org",
           "@type": "Church",
           name: "Rock Chapel International",
-          founder: { "@type": "Person", name: "Apostle Timothy Olatunde Oke" },
+          founder: { "@type": "Person", name: "Apostle Tunde Oke" },
           address: { "@type": "PostalAddress", addressLocality: "Agunbelewo" },
           openingHours: ["Su 09:00-12:00", "We 16:00-18:00"],
         }),
