@@ -66,31 +66,56 @@ function Home() {
       </section>
 
       {/* Service times band */}
-      <section aria-label="Service times" className="border-b border-border bg-cream">
-        <div className="container-page grid gap-6 py-10 sm:grid-cols-2 lg:grid-cols-4">
+      <section aria-label="Service times and location" className="border-b border-border bg-cream">
+        <div className="container-page grid gap-6 py-10 sm:grid-cols-2 lg:grid-cols-3">
           {site.services.map((s, i) => (
             <Reveal key={s.day} delay={i * 80} className="flex items-start gap-3">
               <Clock className="mt-0.5 size-5 shrink-0 text-gold" aria-hidden="true" />
               <div className="min-w-0">
                 <p className="font-medium">{s.day}</p>
-                <p className="text-sm text-muted-foreground">{s.time}</p>
+                <p className="text-sm text-muted-foreground">
+                  {s.time} · {s.note}
+                </p>
               </div>
             </Reveal>
           ))}
           <Reveal delay={160} className="flex items-start gap-3">
             <MapPin className="mt-0.5 size-5 shrink-0 text-gold" aria-hidden="true" />
             <div className="min-w-0">
-              <p className="font-medium">Headquarters</p>
-              <p className="text-sm text-muted-foreground">{site.headquarters}</p>
+              <p className="font-medium">Church address</p>
+              <p className="text-sm text-muted-foreground">{site.address}</p>
             </div>
           </Reveal>
-          <Reveal delay={240} className="flex items-start gap-3">
-            <MapPin className="mt-0.5 size-5 shrink-0 text-gold" aria-hidden="true" />
-            <div className="min-w-0">
-              <p className="font-medium">Branch</p>
-              <p className="text-sm text-muted-foreground">{site.branch}</p>
-            </div>
-          </Reveal>
+        </div>
+      </section>
+
+      {/* Core values */}
+      <section className="py-20 lg:py-24">
+        <div className="container-page">
+          <SectionTitle
+            eyebrow="Core values"
+            title="What we live by"
+            description="Three convictions shape how we worship, serve and grow together."
+            align="center"
+          />
+          <div className="mt-14 grid gap-6 md:grid-cols-3">
+            {coreValues.map((v, i) => (
+              <Reveal key={v.title} delay={i * 90}>
+                <SurfaceCard className="h-full text-center">
+                  <span
+                    aria-hidden="true"
+                    className="mx-auto grid size-12 place-items-center rounded-2xl bg-navy font-display text-lg font-semibold text-gold"
+                  >
+                    {i + 1}
+                  </span>
+                  <h3 className="mt-5 font-display text-xl font-semibold">{v.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {v.description}
+                  </p>
+                </SurfaceCard>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
