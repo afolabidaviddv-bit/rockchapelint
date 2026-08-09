@@ -14,9 +14,9 @@ import sanctuaryImg from "@/assets/about-sanctuary.jpg";
 export const Route = createFileRoute("/")({
   head: () =>
     pageMeta({
-      title: "Rock Chapel International — A Church Family in Agunbelewo",
+      title: "Rock Chapel International — Bringing Succour to Our Generation",
       description:
-        "Welcome to Rock Chapel International, founded by Apostle Tunde Oke. Sunday service 9AM–12PM, Wednesday 4PM–6PM at BCGA and Agunbelewo.",
+        "Rock Chapel International, founded in 2002 by Apostle Tunde Oke. Sunday service 9:00 AM, Wednesday 4:00 PM at No. 10 Ajibade Street, BCGA, Osogbo, Osun State.",
       path: "/",
     }),
   component: Home,
@@ -42,14 +42,14 @@ function Home() {
           <div className="max-w-3xl">
             <p className="animate-fade-in inline-flex items-center gap-2 rounded-full border border-gold/40 bg-navy/40 px-4 py-2 text-xs tracking-[0.2em] text-gold uppercase backdrop-blur-sm">
               <Sparkles className="size-3.5" aria-hidden="true" />
-              Welcome home
+              {site.tagline}
             </p>
             <h1 className="animate-fade-in mt-6 font-display text-4xl leading-[1.05] font-semibold text-balance text-primary-foreground sm:text-6xl lg:text-7xl">
               Rock Chapel <span className="text-gradient-gold">International</span>
             </h1>
             <p className="animate-fade-in mt-6 max-w-xl text-base leading-relaxed text-primary-foreground/80 sm:text-lg">
-              A place of encounter, growth and purpose. Founded by {site.founder}, we gather week
-              after week to worship sincerely, study deeply and serve our community with love.
+              Founded in {site.founded} by {site.founder}, we are committed to evangelism,
+              miracles and discipleship — making men worthy of God's Kingdom.
             </p>
             <div className="animate-fade-in mt-9 flex flex-wrap gap-3">
               <Button asChild variant="gold" size="lg">
