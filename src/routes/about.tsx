@@ -20,10 +20,26 @@ export const Route = createFileRoute("/about")({
 });
 
 const milestones = [
-  { year: "2002", title: "The first gathering", body: "A handful of believers met to pray and study scripture together." },
-  { year: "2009", title: "Headquarters established", body: "The congregation settled into its BCGA headquarters home." },
-  { year: "2016", title: "Agunbelewo branch", body: "A second location opened to serve the growing community." },
-  { year: "2024", title: "Outreach expansion", body: "Medical, education and food programmes reached record numbers." },
+  {
+    year: "2002",
+    title: "The church is founded",
+    body: "Apostle Tunde Oke founds Rock Chapel International with a mandate for evangelism and discipleship.",
+  },
+  {
+    year: "Today",
+    title: "Osogbo & Agunbelewo",
+    body: "Worship continues at No. 10 Ajibade Street, BCGA, Osogbo, with ministry reaching Agunbelewo.",
+  },
+  {
+    year: "Arms",
+    title: "Schools & radio",
+    body: "Rock Model Schools and our Radio Gospel Broadcast extend the vision beyond our walls.",
+  },
+  {
+    year: "Ahead",
+    title: "More milestones",
+    body: "Placeholder — add further dates and achievements from the admin dashboard.",
+  },
 ];
 
 function About() {
