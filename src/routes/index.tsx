@@ -16,7 +16,7 @@ export const Route = createFileRoute("/")({
     pageMeta({
       title: "Rock Chapel International — A Church Family in Agunbelewo",
       description:
-        "Welcome to Rock Chapel International, founded by Apostle Timothy Olatunde Oke. Sunday service 9AM–12PM, Wednesday 4PM–6PM at BCGA and Agunbelewo.",
+        "Welcome to Rock Chapel International, founded by Apostle Tunde Oke. Sunday service 9AM–12PM, Wednesday 4PM–6PM at BCGA and Agunbelewo.",
       path: "/",
     }),
   component: Home,

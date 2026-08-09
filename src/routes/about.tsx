@@ -13,7 +13,7 @@ export const Route = createFileRoute("/about")({
     pageMeta({
       title: "About Us — Rock Chapel International",
       description:
-        "Our story, mission and beliefs. Rock Chapel International is a Word-centred church family founded by Apostle Timothy Olatunde Oke.",
+        "Our story, mission and beliefs. Rock Chapel International is a Word-centred church family founded by Apostle Tunde Oke.",
       path: "/about",
     }),
   component: About,

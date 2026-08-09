@@ -12,7 +12,7 @@ export const Route = createFileRoute("/leadership")({
     pageMeta({
       title: "Leadership — Rock Chapel International",
       description:
-        "Meet Apostle Timothy Olatunde Oke and the pastoral team shepherding Rock Chapel International across BCGA and Agunbelewo.",
+        "Meet Apostle Tunde Oke and the pastoral team shepherding Rock Chapel International across BCGA and Agunbelewo.",
       path: "/leadership",
     }),
   component: Leadership,

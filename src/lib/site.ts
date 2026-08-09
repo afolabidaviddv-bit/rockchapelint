@@ -126,7 +126,7 @@ export const ministries = [
 
 export const leaders = [
   {
-    name: "Apostle Timothy Olatunde Oke",
+    name: "Apostle Tunde Oke",
     role: "Founder & Presiding Apostle",
     bio: "Set apart to raise a generation rooted in the Word, Apostle Oke has given decades to teaching, church planting and mentoring ministers across the region.",
   },
@@ -160,7 +160,7 @@ export const leaders = [
 export const sermons = [
   {
     title: "The Anchor That Holds",
-    speaker: "Apostle Timothy Olatunde Oke",
+    speaker: "Apostle Tunde Oke",
     series: "Foundations",
     date: "July 26, 2026",
     duration: "48 min",
@@ -196,7 +196,7 @@ export const sermons = [
   },
   {
     title: "Giving That Gladdens",
-    speaker: "Apostle Timothy Olatunde Oke",
+    speaker: "Apostle Tunde Oke",
     series: "Stewardship",
     date: "June 28, 2026",
     duration: "39 min",

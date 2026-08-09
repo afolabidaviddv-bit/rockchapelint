@@ -12,7 +12,7 @@ export const Route = createFileRoute("/sermons")({
     pageMeta({
       title: "Sermons — Rock Chapel International",
       description:
-        "Listen to recent messages from Apostle Timothy Olatunde Oke and the Rock Chapel International teaching team.",
+        "Listen to recent messages from Apostle Tunde Oke and the Rock Chapel International teaching team.",
       path: "/sermons",
     }),
   component: Sermons,
