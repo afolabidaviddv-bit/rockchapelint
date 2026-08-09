@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { pageMeta } from "@/lib/seo";
 import { site } from "@/lib/site";
 import { PageHeader } from "@/components/PageHeader";
@@ -38,22 +38,13 @@ function Contact() {
           <div className="space-y-6">
             <Reveal delay={90}>
               <SurfaceCard>
-                <h2 className="font-display text-xl font-semibold">Locations</h2>
+                <h2 className="font-display text-xl font-semibold">Church address</h2>
                 <ul className="mt-4 space-y-4 text-sm text-muted-foreground">
                   <li className="flex gap-3">
                     <MapPin className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden="true" />
                     <span>
-                      <strong className="block font-medium text-foreground">
-                        {site.headquarters}
-                      </strong>
-                      Main campus · Sunday & Wednesday services
-                    </span>
-                  </li>
-                  <li className="flex gap-3">
-                    <MapPin className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden="true" />
-                    <span>
-                      <strong className="block font-medium text-foreground">{site.branch}</strong>
-                      Branch campus · Sunday services & outreach
+                      <strong className="block font-medium text-foreground">{site.address}</strong>
+                      Sunday & Wednesday services
                     </span>
                   </li>
                 </ul>
@@ -83,8 +74,14 @@ function Contact() {
                 <ul className="mt-4 space-y-3 text-sm">
                   <li className="flex gap-3">
                     <Phone className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden="true" />
-                    <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="hover:text-gold">
+                    <a href={`tel:${site.phone}`} className="hover:text-gold">
                       {site.phone}
+                    </a>
+                  </li>
+                  <li className="flex gap-3">
+                    <Phone className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden="true" />
+                    <a href={`tel:${site.phoneAlt}`} className="hover:text-gold">
+                      {site.phoneAlt}
                     </a>
                   </li>
                   <li className="flex gap-3">
@@ -94,19 +91,26 @@ function Contact() {
                     </a>
                   </li>
                 </ul>
+                <a
+                  href={`https://wa.me/${site.whatsapp}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-5 inline-flex h-11 items-center gap-2 rounded-full bg-navy px-5 text-sm font-medium text-primary-foreground transition-transform duration-200 hover:scale-[1.02]"
+                >
+                  <MessageCircle className="size-4" aria-hidden="true" />
+                  Chat with us on WhatsApp
+                </a>
               </SurfaceCard>
             </Reveal>
 
             <Reveal delay={300}>
-              <div
-                className="grid h-56 place-items-center rounded-2xl border border-dashed border-border bg-muted/60 text-center text-sm text-muted-foreground"
-                role="img"
-                aria-label="Map placeholder for church locations"
-              >
-                <span className="px-6">
-                  Map placeholder — add your embedded map here when the exact address is confirmed.
-                </span>
-              </div>
+              <iframe
+                title="Map showing Rock Chapel International"
+                src={`https://www.google.com/maps?q=${encodeURIComponent(site.mapQuery)}&output=embed`}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="h-64 w-full rounded-2xl border border-border/60 shadow-soft"
+              />
             </Reveal>
           </div>
         </div>
