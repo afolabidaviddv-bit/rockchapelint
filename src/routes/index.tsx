@@ -290,6 +290,59 @@ function Home() {
         </div>
       </section>
 
+      {/* Arms & organizations */}
+      <section className="py-20 lg:py-24">
+        <div className="container-page">
+          <SectionTitle
+            eyebrow="Our arms & organizations"
+            title="Ministry beyond our walls"
+            description="Extensions of the Rock Chapel International vision, serving our generation every day."
+            align="center"
+          />
+          <div className="mt-14 grid gap-6 md:grid-cols-2">
+            {organizations.map((o, i) => (
+              <Reveal key={o.title} delay={i * 90}>
+                <SurfaceCard className="h-full">
+                  <h3 className="font-display text-xl font-semibold">{o.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {o.description}
+                  </p>
+                </SurfaceCard>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Find us */}
+      <section className="bg-muted/50 py-20 lg:py-24">
+        <div className="container-page grid items-center gap-10 lg:grid-cols-2">
+          <div>
+            <SectionTitle
+              eyebrow="Find us"
+              title="Come and worship with us"
+              description={site.address}
+            />
+            <Reveal delay={120} className="mt-8">
+              <Button asChild variant="primary">
+                <Link to="/contact">
+                  Get directions <ArrowRight aria-hidden="true" />
+                </Link>
+              </Button>
+            </Reveal>
+          </div>
+          <Reveal delay={80}>
+            <iframe
+              title="Map showing Rock Chapel International"
+              src={`https://www.google.com/maps?q=${encodeURIComponent(site.mapQuery)}&output=embed`}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="h-80 w-full rounded-3xl border border-border/60 shadow-soft"
+            />
+          </Reveal>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="py-20 lg:py-28">
         <div className="container-page">
