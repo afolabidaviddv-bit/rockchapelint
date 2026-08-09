@@ -1,6 +1,6 @@
 import type { FormEvent } from "react";
 import { Link } from "@tanstack/react-router";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { toast } from "sonner";
 import { navLinks, site } from "@/lib/site";
 import { Button } from "./Button";
@@ -108,16 +108,29 @@ export function Footer() {
             <ul className="mt-5 space-y-3 text-sm text-primary-foreground/70">
               <li className="flex gap-3">
                 <MapPin className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden="true" />
-                <span>
-                  {site.headquarters}
-                  <br />
-                  {site.branch}
-                </span>
+                <span>{site.address}</span>
               </li>
               <li className="flex gap-3">
                 <Phone className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden="true" />
-                <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="hover:text-gold">
-                  {site.phone}
+                <span>
+                  <a href={`tel:${site.phone}`} className="hover:text-gold">
+                    {site.phone}
+                  </a>
+                  {" · "}
+                  <a href={`tel:${site.phoneAlt}`} className="hover:text-gold">
+                    {site.phoneAlt}
+                  </a>
+                </span>
+              </li>
+              <li className="flex gap-3">
+                <MessageCircle className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden="true" />
+                <a
+                  href={`https://wa.me/${site.whatsapp}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-gold"
+                >
+                  Chat on WhatsApp
                 </a>
               </li>
               <li className="flex gap-3">
