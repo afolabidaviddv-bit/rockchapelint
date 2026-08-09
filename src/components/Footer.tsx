@@ -4,6 +4,7 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import { toast } from "sonner";
 import { navLinks, site } from "@/lib/site";
 import { Button } from "./Button";
+import logoMark from "@/assets/logo-mark.png";
 
 export function Footer() {
   const onSubscribe = (e: FormEvent<HTMLFormElement>) => {
