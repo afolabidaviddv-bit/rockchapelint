@@ -23,7 +23,7 @@ const methods = [
   {
     icon: Landmark,
     title: "Bank transfer",
-    body: "Account Name: Rock Chapel International · Bank: Placeholder Bank · Account No: 0000000000",
+    body: `Bank: ${site.giving.bank} · Account Name: ${site.giving.accountName} · Account Number: ${site.giving.accountNumber}`,
   },
   {
     icon: Banknote,
@@ -101,14 +101,34 @@ function Give() {
               </Reveal>
             ))}
           </div>
-          <Reveal delay={120} className="mt-10 text-sm text-muted-foreground">
-            <p>
-              Questions about giving? Email{" "}
-              <a href={`mailto:${site.email}`} className="text-gold underline-offset-4 hover:underline">
-                {site.email}
-              </a>
-              . Account details above are placeholders and can be replaced at any time.
-            </p>
+          <Reveal delay={120} className="mt-10">
+            <div className="rounded-2xl border border-gold/30 bg-cream p-6">
+              <h3 className="font-display text-lg font-semibold">Church account details</h3>
+              <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-3">
+                <div>
+                  <dt className="text-muted-foreground">Bank</dt>
+                  <dd className="font-medium">{site.giving.bank}</dd>
+                </div>
+                <div>
+                  <dt className="text-muted-foreground">Account name</dt>
+                  <dd className="font-medium">{site.giving.accountName}</dd>
+                </div>
+                <div>
+                  <dt className="text-muted-foreground">Account number</dt>
+                  <dd className="font-medium tracking-wide">{site.giving.accountNumber}</dd>
+                </div>
+              </dl>
+              <p className="mt-5 text-sm text-muted-foreground">
+                Questions about giving? Email{" "}
+                <a
+                  href={`mailto:${site.email}`}
+                  className="text-gold underline-offset-4 hover:underline"
+                >
+                  {site.email}
+                </a>{" "}
+                or call {site.phone}.
+              </p>
+            </div>
           </Reveal>
         </div>
       </section>
