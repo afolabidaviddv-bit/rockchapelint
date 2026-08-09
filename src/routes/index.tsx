@@ -1,7 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, CalendarDays, Clock, MapPin, Sparkles } from "lucide-react";
 import { pageMeta } from "@/lib/seo";
-import { site, ministries, events, sermons, testimonials } from "@/lib/site";
+import {
+  site,
+  ministries,
+  events,
+  sermons,
+  testimonials,
+  coreValues,
+  organizations,
+} from "@/lib/site";
 import { Button } from "@/components/Button";
 import { Reveal } from "@/components/Reveal";
 import { SectionTitle } from "@/components/SectionTitle";
