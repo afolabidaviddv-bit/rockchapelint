@@ -1,23 +1,64 @@
 export const site = {
   name: "Rock Chapel International",
   short: "Rock Chapel",
-  founder: "Apostle Timothy Olatunde Oke",
-  tagline: "A place of encounter, growth and purpose.",
-  headquarters: "BCGA Headquarters",
-  branch: "Agunbelewo Branch",
-  email: "hello@rockchapelinternational.org",
-  phone: "+234 800 000 0000",
+  founder: "Apostle Tunde Oke",
+  tagline: "Bringing succour to our generation",
+  founded: "2002",
+  address: "No. 10 Ajibade Street, BCGA, Osogbo, Osun State, Nigeria",
+  headquarters: "BCGA, Osogbo",
+  branch: "Agunbelewo",
+  email: "okeolatunde60@gmail.com",
+  phone: "08067006094",
+  phoneAlt: "08101080601",
+  whatsapp: "2348067006094",
+  mapQuery: "No. 10 Ajibade Street, BCGA, Osogbo, Osun State, Nigeria",
   services: [
-    { day: "Sunday Service", time: "9:00 AM – 12:00 PM", note: "Worship, Word & Communion" },
-    { day: "Wednesday Service", time: "4:00 PM – 6:00 PM", note: "Midweek Bible Study" },
+    { day: "Sunday Service", time: "9:00 AM", note: "Worship & the Word" },
+    { day: "Wednesday Service", time: "4:00 PM", note: "Midweek Bible Study" },
   ],
+  giving: {
+    bank: "GTBank",
+    accountName: "Oke Olatunde",
+    accountNumber: "0035905030",
+  },
   socials: [
-    { label: "Facebook", href: "#" },
-    { label: "Instagram", href: "#" },
-    { label: "YouTube", href: "#" },
-    { label: "X", href: "#" },
+    { label: "YouTube", href: "" },
+    { label: "TikTok", href: "" },
+    { label: "Instagram", href: "" },
+    { label: "X", href: "" },
   ],
 } as const;
+
+export const coreValues = [
+  {
+    title: "Faithfulness",
+    description:
+      "We stay true to God, to His Word and to one another — in every season, seen and unseen.",
+  },
+  {
+    title: "Commitment",
+    description:
+      "We give ourselves wholeheartedly to worship, to service and to the people God has entrusted to us.",
+  },
+  {
+    title: "Goal-getting",
+    description:
+      "We pursue God-given assignments with diligence until they are finished, for His glory.",
+  },
+];
+
+export const organizations = [
+  {
+    title: "Rock Model Schools",
+    description:
+      "Our education arm, raising children with sound learning and godly character.",
+  },
+  {
+    title: "Radio Gospel Broadcast",
+    description:
+      "Taking the message of hope beyond our walls through radio ministry.",
+  },
+];
 
 export const navLinks = [
   { label: "Home", to: "/" },
