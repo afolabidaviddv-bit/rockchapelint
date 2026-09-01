@@ -67,17 +67,19 @@ function DashboardPage() {
 
   return (
     <AdminShell>
-      <section className="overflow-hidden rounded-3xl bg-navy p-6 text-primary-foreground shadow-soft sm:p-8">
-        <p className="text-xs font-medium tracking-[0.18em] text-gold uppercase">
-          Rock Chapel International
-        </p>
-        <h1 className="mt-2 font-display text-2xl font-semibold sm:text-3xl">
-          Welcome back — here's your church at a glance
-        </h1>
-        <p className="mt-2 max-w-xl text-sm text-primary-foreground/75">
-          Everything on the public website is managed from here. Pick a card below, or use the
-          quick actions to add something new.
-        </p>
+      <section className="relative overflow-hidden rounded-3xl bg-navy p-6 text-primary-foreground shadow-lift sm:p-8">
+        <div className="relative z-10 max-w-2xl">
+          <p className="text-xs font-medium tracking-[0.18em] text-gold uppercase">
+            Good morning, admin
+          </p>
+          <h1 className="mt-3 max-w-xl text-balance font-display text-3xl font-semibold leading-tight sm:text-4xl">
+            Keep Rock Chapel&apos;s story moving forward.
+          </h1>
+          <p className="mt-3 max-w-xl text-sm leading-6 text-primary-foreground/75 sm:text-base">
+            Your most important updates, messages, and prayer requests are gathered here so you can
+            care for the church without the clutter.
+          </p>
+        </div>
         {!loading && (newPrayers > 0 || unread > 0) ? (
           <div className="mt-5 flex flex-wrap gap-3">
             {newPrayers > 0 ? (
@@ -100,9 +102,14 @@ function DashboardPage() {
         ) : null}
       </section>
 
-
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <StatCard label="Sermons" value={count("sermons")} icon={Mic2} loading={loading} hint="Published archive" />
+      <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-4 xl:grid-cols-4">
+        <StatCard
+          label="Sermons"
+          value={count("sermons")}
+          icon={Mic2}
+          loading={loading}
+          hint="Published archive"
+        />
         <StatCard
           label="Upcoming events"
           value={(data.events ?? []).filter((e) => e["status"] === "upcoming").length}
@@ -110,12 +117,48 @@ function DashboardPage() {
           loading={loading}
           hint={`${count("events")} total`}
         />
-        <StatCard label="Ministries" value={count("ministries")} icon={UsersRound} loading={loading} hint="Active departments" />
-        <StatCard label="Subscribers" value={count("subscribers")} icon={Mail} loading={loading} hint="Newsletter list" />
-        <StatCard label="Prayer requests" value={count("prayer_requests")} icon={HandHeart} loading={loading} hint={`${newPrayers} new`} />
-        <StatCard label="Messages" value={count("contact_messages")} icon={Inbox} loading={loading} hint={`${unread} unread`} />
-        <StatCard label="Gallery photos" value={count("gallery")} icon={Images} loading={loading} hint="Across all albums" />
-        <StatCard label="Announcements" value={count("announcements")} icon={Megaphone} loading={loading} hint="Currently listed" />
+        <StatCard
+          label="Ministries"
+          value={count("ministries")}
+          icon={UsersRound}
+          loading={loading}
+          hint="Active departments"
+        />
+        <StatCard
+          label="Subscribers"
+          value={count("subscribers")}
+          icon={Mail}
+          loading={loading}
+          hint="Newsletter list"
+        />
+        <StatCard
+          label="Prayer requests"
+          value={count("prayer_requests")}
+          icon={HandHeart}
+          loading={loading}
+          hint={`${newPrayers} new`}
+        />
+        <StatCard
+          label="Messages"
+          value={count("contact_messages")}
+          icon={Inbox}
+          loading={loading}
+          hint={`${unread} unread`}
+        />
+        <StatCard
+          label="Gallery photos"
+          value={count("gallery")}
+          icon={Images}
+          loading={loading}
+          hint="Across all albums"
+        />
+        <StatCard
+          label="Announcements"
+          value={count("announcements")}
+          icon={Megaphone}
+          loading={loading}
+          hint="Currently listed"
+        />
       </div>
 
       <div className="mt-8 grid gap-6 lg:grid-cols-2">
@@ -128,14 +171,18 @@ function DashboardPage() {
           </div>
           <ul className="mt-4 space-y-3">
             {loading
-              ? Array.from({ length: 3 }).map((_, i) => <Skeleton key={i} className="h-16 rounded-xl" />)
+              ? Array.from({ length: 3 }).map((_, i) => (
+                  <Skeleton key={i} className="h-16 rounded-xl" />
+                ))
               : recentPrayers.map((r) => (
                   <li
                     key={r.id}
                     className="rounded-xl bg-muted/50 p-4 transition-colors hover:bg-muted"
                   >
                     <div className="flex items-center justify-between gap-3">
-                      <span className="text-sm font-medium text-foreground">{String(r["name"])}</span>
+                      <span className="text-sm font-medium text-foreground">
+                        {String(r["name"])}
+                      </span>
                       <Badge variant="secondary" className="rounded-full capitalize">
                         {String(r["status"])}
                       </Badge>
@@ -157,9 +204,14 @@ function DashboardPage() {
           </div>
           <ul className="mt-4 space-y-3">
             {loading
-              ? Array.from({ length: 3 }).map((_, i) => <Skeleton key={i} className="h-16 rounded-xl" />)
+              ? Array.from({ length: 3 }).map((_, i) => (
+                  <Skeleton key={i} className="h-16 rounded-xl" />
+                ))
               : upcoming.map((e) => (
-                  <li key={e.id} className="rounded-xl bg-muted/50 p-4 transition-colors hover:bg-muted">
+                  <li
+                    key={e.id}
+                    className="rounded-xl bg-muted/50 p-4 transition-colors hover:bg-muted"
+                  >
                     <p className="text-sm font-medium text-foreground">{String(e["title"])}</p>
                     <p className="mt-1 text-xs text-muted-foreground">
                       {String(e["date"])} · {String(e["location"])}

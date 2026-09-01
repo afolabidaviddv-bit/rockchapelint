@@ -21,17 +21,21 @@ export function StatCard({
   return (
     <Card
       className={cn(
-        "animate-in fade-in slide-in-from-bottom-2 rounded-2xl border-border/70 p-5 shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift",
+        "animate-in fade-in slide-in-from-bottom-2 rounded-2xl border-border/70 bg-card p-4 shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift sm:p-5",
         className,
       )}
     >
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
-          <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">{label}</p>
+          <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
+            {label}
+          </p>
           {loading ? (
             <Skeleton className="mt-3 h-8 w-16" />
           ) : (
-            <p className="mt-2 font-display text-3xl font-semibold text-navy">{value}</p>
+            <p className="mt-2 font-display text-2xl font-semibold text-navy sm:text-3xl">
+              {value}
+            </p>
           )}
           {hint ? <p className="mt-1 text-xs text-muted-foreground">{hint}</p> : null}
         </div>
