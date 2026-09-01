@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { demoCredentials, useAdminAuth } from "@/admin/auth";
+import { adminAccountEmail, useAdminAuth } from "@/admin/auth";
 
 export function AdminLogin({ redirectTo = "/admin" }: { redirectTo?: string }) {
   const { signIn, backend } = useAdminAuth();
@@ -121,10 +121,8 @@ export function AdminLogin({ redirectTo = "/admin" }: { redirectTo?: string }) {
           </form>
 
           <div className="mt-6 rounded-xl bg-muted px-4 py-3 text-xs text-muted-foreground">
-            <p className="font-medium text-foreground">Preview credentials</p>
-            <p className="mt-1">
-              {demoCredentials.email} · {demoCredentials.password}
-            </p>
+            <p className="font-medium text-foreground">Primary administrator</p>
+            <p className="mt-1">{adminAccountEmail}</p>
           </div>
 
           <p className="mt-6 text-center text-xs text-muted-foreground">

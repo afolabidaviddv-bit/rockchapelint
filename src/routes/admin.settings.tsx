@@ -42,6 +42,11 @@ const settingsFields: FieldConfig[] = [
   { name: "tiktok_url", label: "TikTok URL", type: "url" },
   { name: "instagram_url", label: "Instagram URL", type: "url" },
   { name: "x_url", label: "X (Twitter) URL", type: "url" },
+  { name: "header_logo_url", label: "Header logo", type: "image", folder: "branding", group: "Site imagery" },
+  { name: "footer_logo_url", label: "Footer logo", type: "image", folder: "branding", group: "Site imagery" },
+  { name: "hero_image_url", label: "Homepage hero image", type: "image", folder: "homepage", group: "Site imagery" },
+  { name: "about_image_url", label: "About page image", type: "image", folder: "about", group: "Site imagery" },
+  { name: "directions_image_url", label: "Directions image", type: "image", folder: "directions", group: "Site imagery" },
   {
     name: "maintenance_mode",
     label: "Maintenance mode",
