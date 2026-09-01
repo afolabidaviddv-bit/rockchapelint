@@ -34,9 +34,9 @@ export function RecordCards({
 }) {
   if (loading) {
     return (
-      <div className="grid gap-4 p-6 sm:grid-cols-2 xl:grid-cols-3">
+      <div className="grid gap-3 p-4 sm:grid-cols-2 sm:gap-4 sm:p-6 xl:grid-cols-3">
         {Array.from({ length: 6 }).map((_, i) => (
-          <Skeleton key={i} className="h-44 rounded-2xl" />
+          <Skeleton key={i} className="h-40 rounded-2xl sm:h-44" />
         ))}
       </div>
     );
@@ -44,7 +44,7 @@ export function RecordCards({
   if (rows.length === 0) return <>{empty}</>;
 
   return (
-    <div className="grid gap-4 p-4 sm:grid-cols-2 sm:p-6 xl:grid-cols-3">
+    <div className="grid gap-3 p-4 sm:grid-cols-2 sm:gap-4 sm:p-6 xl:grid-cols-3">
       {rows.map((row) => {
         const badge = card.badge ? String(row[card.badge] ?? "") : "";
         const published = row["published"];
@@ -57,19 +57,19 @@ export function RecordCards({
               <MediaThumb
                 value={row[card.image]}
                 alt={String(row[card.title] ?? "Image")}
-                className="h-40 w-full rounded-none"
+                className="h-36 w-full rounded-none sm:h-40"
               />
             ) : null}
 
-            <div className="flex flex-1 flex-col gap-2 px-5 pt-4 pb-5">
+            <div className="flex flex-1 flex-col gap-2 px-4 pt-3 pb-4 sm:px-5 sm:pt-4 sm:pb-5">
               <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-3">
                 <div className="min-w-0">
                   {card.eyebrow ? (
-                    <p className="truncate text-xs font-medium tracking-wide text-muted-foreground uppercase">
+                    <p className="truncate text-[0.65rem] font-medium tracking-wide text-muted-foreground uppercase sm:text-xs">
                       {String(row[card.eyebrow] ?? "—")}
                     </p>
                   ) : null}
-                  <h3 className="line-clamp-2 font-display text-lg leading-snug font-semibold text-navy">
+                  <h3 className="line-clamp-2 font-display text-base leading-snug font-semibold text-navy sm:text-lg">
                     {String(row[card.title] ?? "Untitled")}
                   </h3>
                 </div>
@@ -108,7 +108,8 @@ export function RecordCards({
                     ) : null,
                   )}
                 </div>
-                <div className="flex shrink-0 gap-1 opacity-70 transition-opacity group-hover:opacity-100">
+                {/* Always visible on mobile, hover-reveal on desktop */}
+                <div className="flex shrink-0 gap-1 sm:opacity-70 sm:transition-opacity sm:group-hover:opacity-100">
                   {canEdit ? (
                     <Button
                       type="button"

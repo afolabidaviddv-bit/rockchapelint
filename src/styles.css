@@ -211,3 +211,10 @@
     transform: scale(1.06);
   }
 }
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
