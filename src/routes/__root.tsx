@@ -100,7 +100,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap",
       },
-      { rel: "icon", href: "/favicon.png", type: "image/png" },
+      { rel: "icon", href: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1788261279795-VRKNOTEp0yPImkSk2UCTHsoqwe3Ddz.png", type: "image/png" },
     ],
     scripts: [
       {
