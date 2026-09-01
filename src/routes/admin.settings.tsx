@@ -27,7 +27,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { db } from "@/admin/store";
-import { supabaseConfigured, useAdminAuth } from "@/admin/auth";
+import { useAdminAuth } from "@/admin/auth";
 import type { BaseRecord, FieldConfig } from "@/admin/types";
 
 export const Route = createFileRoute("/admin/settings")({
@@ -102,7 +102,7 @@ const settingsFields: FieldConfig[] = [
 ];
 
 function SettingsPage() {
-  const { user, backend } = useAdminAuth();
+  const { user } = useAdminAuth();
   const [record, setRecord] = useState<BaseRecord | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -141,7 +141,7 @@ function SettingsPage() {
     setEnteredCode("");
     setAdminMessage(null);
     setVerificationOpen(true);
-    toast.success(`Verification code sent to ${adminAccountEmail}`);
+    toast.success("Mock verification code generated");
   };
 
   const verifyAdmin = () => {
@@ -239,10 +239,14 @@ function SettingsPage() {
           <DialogHeader>
             <DialogTitle>Verify new administrator</DialogTitle>
             <DialogDescription>
-              Enter the 6-digit code sent to {adminAccountEmail} to authorize {newAdminName}.
+              Enter the mock 6-digit code shown below to authorize {newAdminName}.
             </DialogDescription>
           </DialogHeader>
-          <div className="grid gap-2 py-4">
+          <div className="grid gap-4 py-4">
+            <div className="rounded-xl bg-muted px-4 py-5 text-center">
+              <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Mock OTP code</p>
+              <p className="mt-2 font-mono text-3xl font-semibold tracking-[0.35em] text-navy">{verificationCode}</p>
+            </div>
             <Label htmlFor="verification-code">Verification code</Label>
             <Input
               id="verification-code"
@@ -278,20 +282,12 @@ function SettingsPage() {
         <h2 className="font-display text-xl font-semibold text-navy">Account & data</h2>
         <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
           <div>
-            <dt className="text-muted-foreground">Signed in as</dt>
-            <dd className="font-medium">{user?.email}</dd>
+            <dt className="text-muted-foreground">Session</dt>
+            <dd className="font-medium">{user ? "Administrator verified" : "Signed out"}</dd>
           </div>
           <div>
-            <dt className="text-muted-foreground">Data backend</dt>
-            <dd className="font-medium">
-              {supabaseConfigured
-                ? "Lovable Cloud (Supabase)"
-                : "Local preview storage — connect Lovable Cloud to persist content"}
-            </dd>
-          </div>
-          <div>
-            <dt className="text-muted-foreground">Auth provider</dt>
-            <dd className="font-medium capitalize">{backend}</dd>
+            <dt className="text-muted-foreground">Data storage</dt>
+            <dd className="font-medium">Local browser state</dd>
           </div>
         </dl>
         <Button

@@ -4,7 +4,7 @@ import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { toast } from "sonner";
 import { navLinks, site } from "@/lib/site";
 import { Button } from "./Button";
-const logoMark = "https://images.unsplash.com/photo-1548625361-58a2f0f8d7f1?auto=format&fit=crop&w=160&q=85";
+const logoMark = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1788261279795-VRKNOTEp0yPImkSk2UCTHsoqwe3Ddz.png";
 
 export function Footer() {
   const onSubscribe = (e: FormEvent<HTMLFormElement>) => {
