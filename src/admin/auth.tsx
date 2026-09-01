@@ -1,4 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 /**
  * Admin authentication layer.
@@ -22,18 +23,10 @@ interface AuthContextValue {
   loading: boolean;
   signIn: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
-  backend: "supabase" | "local";
+  backend: "supabase";
 }
 
-const SESSION_KEY = "rc_admin_session_v1";
-
-/** Flips to true automatically once Cloud env vars exist. */
-export const supabaseConfigured = Boolean(
-  typeof import.meta !== "undefined" && import.meta.env?.["VITE_SUPABASE_URL"],
-);
-
-export const DEMO_EMAIL = "okeolatunde60@gmail.com";
-const DEMO_PASSWORD = "Rockchapel";
+export const supabaseConfigured = Boolean(import.meta.env?.VITE_SUPABASE_URL && import.meta.env?.VITE_SUPABASE_PUBLISHABLE_KEY);
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
@@ -41,42 +34,34 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<AdminUser | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // 1. Restore session
   useEffect(() => {
-    try {
-      const raw = window.localStorage.getItem(SESSION_KEY);
-      if (raw) setUser(JSON.parse(raw) as AdminUser);
-    } catch {
-      /* ignore */
-    }
-    setLoading(false);
+    let mounted = true;
+    void supabase.auth.getUser().then(({ data }) => {
+      if (mounted && data.user) setUser({ id: data.user.id, email: data.user.email ?? "", name: data.user.user_metadata?.full_name ?? "Church Administrator", role: "admin" });
+      if (mounted) setLoading(false);
+    });
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (!mounted) return;
+      setUser(session?.user ? { id: session.user.id, email: session.user.email ?? "", name: session.user.user_metadata?.full_name ?? "Church Administrator", role: "admin" } : null);
+      setLoading(false);
+    });
+    return () => { mounted = false; listener.subscription.unsubscribe(); };
   }, []);
 
-  // 2. Sign in
   const signIn = useCallback(async (email: string, password: string) => {
-    await new Promise((r) => setTimeout(r, 500));
-    const normalized = email.trim().toLowerCase();
-    if (normalized !== DEMO_EMAIL || password !== DEMO_PASSWORD) {
-      throw new Error("Invalid email or password.");
-    }
-    const next: AdminUser = {
-      id: "local-admin",
-      email: normalized,
-      name: "Church Administrator",
-      role: "admin",
-    };
-    window.localStorage.setItem(SESSION_KEY, JSON.stringify(next));
-    setUser(next);
+    const { data, error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
+    if (error || !data.user) throw new Error(error?.message ?? "Invalid email or password.");
+    setUser({ id: data.user.id, email: data.user.email ?? email.trim(), name: data.user.user_metadata?.full_name ?? "Church Administrator", role: "admin" });
   }, []);
 
-  // 3. Sign out
   const signOut = useCallback(async () => {
-    window.localStorage.removeItem(SESSION_KEY);
+    const { error } = await supabase.auth.signOut();
+    if (error) throw error;
     setUser(null);
   }, []);
 
   const value = useMemo<AuthContextValue>(
-    () => ({ user, loading, signIn, signOut, backend: supabaseConfigured ? "supabase" : "local" }),
+    () => ({ user, loading, signIn, signOut, backend: "supabase" }),
     [user, loading, signIn, signOut],
   );
 
@@ -89,4 +74,4 @@ export function useAdminAuth() {
   return ctx;
 }
 
-export const demoCredentials = { email: DEMO_EMAIL, password: DEMO_PASSWORD };
+

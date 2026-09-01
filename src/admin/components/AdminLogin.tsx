@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { demoCredentials, useAdminAuth } from "@/admin/auth";
+import { useAdminAuth } from "@/admin/auth";
 
 export function AdminLogin({ redirectTo = "/admin" }: { redirectTo?: string }) {
   const { signIn, backend } = useAdminAuth();
@@ -56,8 +56,8 @@ export function AdminLogin({ redirectTo = "/admin" }: { redirectTo?: string }) {
         <p className="flex items-center gap-2 text-xs text-primary-foreground/50">
           <ShieldCheck className="size-4" />
           {backend === "supabase"
-            ? "Secured by Lovable Cloud authentication"
-            : "Authentication layer ready for Lovable Cloud"}
+            ? "Secured by Supabase authentication"
+            : "Secure authentication is unavailable"}
         </p>
       </div>
 
@@ -119,13 +119,6 @@ export function AdminLogin({ redirectTo = "/admin" }: { redirectTo?: string }) {
               {submitting ? "Signing in…" : "Sign in"}
             </Button>
           </form>
-
-          <div className="mt-6 rounded-xl bg-muted px-4 py-3 text-xs text-muted-foreground">
-            <p className="font-medium text-foreground">Preview credentials</p>
-            <p className="mt-1">
-              {demoCredentials.email} · {demoCredentials.password}
-            </p>
-          </div>
 
           <p className="mt-6 text-center text-xs text-muted-foreground">
             <Link to="/" className="underline underline-offset-4 hover:text-navy">

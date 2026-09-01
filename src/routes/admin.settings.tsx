@@ -21,7 +21,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { db } from "@/admin/store";
-import { DEMO_EMAIL, supabaseConfigured, useAdminAuth } from "@/admin/auth";
+import { supabaseConfigured, useAdminAuth } from "@/admin/auth";
 import { MediaCatalog } from "@/admin/components/MediaCatalog";
 import type { BaseRecord, FieldConfig } from "@/admin/types";
 
@@ -150,7 +150,7 @@ function SettingsPage() {
           className="mt-6 rounded-full border-destructive/40 text-destructive hover:bg-destructive/10"
           onClick={() => setConfirmReset(true)}
         >
-          Reset demo content
+          Reset content
         </Button>
       </Card>
 
@@ -159,7 +159,7 @@ function SettingsPage() {
       <Card className="mt-6 rounded-2xl border-border/70 p-5 shadow-soft sm:p-6">
         <div className="flex items-start gap-3">
           <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-gold/15 text-gold"><ShieldCheck className="size-5" /></span>
-          <div className="min-w-0 flex-1"><h2 className="font-display text-xl font-semibold text-navy">Admin management</h2><p className="mt-1 text-sm leading-6 text-muted-foreground">Invite a trusted team member. A verification code will be sent to {DEMO_EMAIL} before access is created.</p></div>
+          <div className="min-w-0 flex-1"><h2 className="font-display text-xl font-semibold text-navy">Admin management</h2><p className="mt-1 text-sm leading-6 text-muted-foreground">Invite a trusted team member. A verification code will be sent to the signed-in account before access is created.</p></div>
         </div>
         <Button className="mt-5 h-12 w-full rounded-xl bg-navy text-primary-foreground sm:w-auto" onClick={() => setAddAdminOpen(true)}><UserPlus className="size-4" /> Add admin</Button>
       </Card>
@@ -168,7 +168,7 @@ function SettingsPage() {
         <DialogContent className="rounded-2xl sm:max-w-md">
           <DialogHeader><DialogTitle className="font-display text-2xl text-navy">Add an admin</DialogTitle><DialogDescription>Enter their email. We&apos;ll verify this invitation using the account owner&apos;s email.</DialogDescription></DialogHeader>
           {verificationCode ? (
-            <div className="rounded-2xl bg-gold/10 p-5 text-center"><p className="text-sm font-medium text-navy">Verification code sent to</p><p className="mt-1 text-xs text-muted-foreground">{DEMO_EMAIL}</p><p className="mt-4 font-mono text-4xl font-semibold tracking-[0.3em] text-navy">{verificationCode}</p><Button variant="outline" className="mt-5 h-12 w-full rounded-xl" onClick={() => void navigator.clipboard?.writeText(verificationCode)}><Copy className="size-4" /> Copy code</Button><Button className="mt-2 h-12 w-full rounded-xl bg-navy text-primary-foreground" onClick={() => { setAddAdminOpen(false); setVerificationCode(null); setNewAdminEmail(""); toast.success("Admin invitation authorized"); }}>Done</Button></div>
+            <div className="rounded-2xl bg-gold/10 p-5 text-center"><p className="text-sm font-medium text-navy">Verification code sent to</p><p className="mt-1 text-xs text-muted-foreground">{user?.email}</p><p className="mt-4 font-mono text-4xl font-semibold tracking-[0.3em] text-navy">{verificationCode}</p><Button variant="outline" className="mt-5 h-12 w-full rounded-xl" onClick={() => void navigator.clipboard?.writeText(verificationCode)}><Copy className="size-4" /> Copy code</Button><Button className="mt-2 h-12 w-full rounded-xl bg-navy text-primary-foreground" onClick={() => { setAddAdminOpen(false); setVerificationCode(null); setNewAdminEmail(""); toast.success("Admin invitation authorized"); }}>Done</Button></div>
           ) : <div className="grid gap-4"><div className="grid gap-2"><Label htmlFor="new-admin-email">New admin email</Label><Input id="new-admin-email" type="email" value={newAdminEmail} onChange={(e) => setNewAdminEmail(e.target.value)} placeholder="team@example.com" className="h-12 rounded-xl" /></div><Button className="h-12 rounded-xl bg-navy text-primary-foreground" onClick={inviteAdmin} disabled={!newAdminEmail.trim()}>Send verification code</Button></div>}
         </DialogContent>
       </Dialog>
