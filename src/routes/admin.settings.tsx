@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { db } from "@/admin/store";
 import { DEMO_EMAIL, supabaseConfigured, useAdminAuth } from "@/admin/auth";
+import { MediaCatalog } from "@/admin/components/MediaCatalog";
 import type { BaseRecord, FieldConfig } from "@/admin/types";
 
 export const Route = createFileRoute("/admin/settings")({
@@ -152,6 +153,8 @@ function SettingsPage() {
           Reset demo content
         </Button>
       </Card>
+
+      <MediaCatalog />
 
       <Card className="mt-6 rounded-2xl border-border/70 p-5 shadow-soft sm:p-6">
         <div className="flex items-start gap-3">
