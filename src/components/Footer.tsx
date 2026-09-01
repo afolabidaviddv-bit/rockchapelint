@@ -5,9 +5,10 @@ import { toast } from "sonner";
 import { navLinks, site } from "@/lib/site";
 import { Button } from "./Button";
 import { handleImageError } from "@/lib/image-fallback";
-const logoMark = "";
+import { useSiteMedia } from "@/hooks/use-site-media";
 
 export function Footer() {
+  const { logo: logoMark } = useSiteMedia();
   const onSubscribe = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;

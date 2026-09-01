@@ -59,7 +59,16 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
   const signIn = useCallback(async (email: string, password: string) => {
     if (!supabaseConfigured) throw new Error("Supabase is not configured for this preview.");
     const { data, error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
-    if (error || !data.user) throw new Error(error?.message ?? "Invalid email or password.");
+    if (error || !data.user) {
+      const normalized = error?.message.toLowerCase() ?? "";
+      if (normalized.includes("email not confirmed")) {
+        throw new Error("Your email address is not confirmed. Check your inbox for the Supabase confirmation email.");
+      }
+      if (normalized.includes("invalid login credentials")) {
+        throw new Error("Invalid email or password. Make sure this account was created in the connected Supabase project.");
+      }
+      throw new Error("Unable to sign in. Check your account details and try again.");
+    }
     setUser({ id: data.user.id, email: data.user.email ?? email.trim(), name: data.user.user_metadata?.full_name ?? "Church Administrator", role: "admin" });
   }, []);
 

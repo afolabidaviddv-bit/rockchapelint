@@ -6,7 +6,8 @@ import { SectionTitle } from "@/components/SectionTitle";
 import { Reveal } from "@/components/Reveal";
 import { SurfaceCard, ImageCard } from "@/components/Cards";
 import { StatCounter } from "@/components/StatCounter";
-const sanctuaryImg = "https://images.unsplash.com/photo-1548625361-1934e6c986eb?auto=format&fit=crop&w=1200&q=80";
+import { handleImageError } from "@/lib/image-fallback";
+import { useSiteMedia } from "@/hooks/use-site-media";
 
 export const Route = createFileRoute("/about")({
   head: () =>
@@ -43,6 +44,7 @@ const milestones = [
 ];
 
 function About() {
+  const { about: sanctuaryImg } = useSiteMedia();
   return (
     <>
       <PageHeader
@@ -74,6 +76,7 @@ function About() {
           <Reveal delay={80}>
             <ImageCard
               src={sanctuaryImg}
+              onError={handleImageError}
               alt="Interior of the Rock Chapel International sanctuary"
               ratio="aspect-4/5"
             />

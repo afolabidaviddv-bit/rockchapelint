@@ -5,12 +5,13 @@ import { pageMeta } from "@/lib/seo";
 import { PageHeader } from "@/components/PageHeader";
 import { Reveal } from "@/components/Reveal";
 import { handleImageError } from "@/lib/image-fallback";
-const g1 = "";
-const g2 = "";
-const g3 = "";
-const g4 = "";
-const hero = "";
-const sanctuary = "";
+import { useSiteMedia } from "@/hooks/use-site-media";
+const g1 = "https://images.unsplash.com/photo-1519491050282-cf00c82424b4?auto=format&fit=crop&w=1200&q=80";
+const g2 = "https://images.unsplash.com/photo-1507692049790-de58290a4334?auto=format&fit=crop&w=1200&q=80";
+const g3 = "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=1200&q=80";
+const g4 = "https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=1200&q=80";
+const hero = "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=1600&q=80";
+const sanctuary = "https://images.unsplash.com/photo-1548625361-1934e6c986eb?auto=format&fit=crop&w=1200&q=80";
 
 export const Route = createFileRoute("/gallery")({
   head: () =>
@@ -33,8 +34,10 @@ const photos = [
 ];
 
 function Gallery() {
+  const media = useSiteMedia();
+  const galleryPhotos = photos.map((photo, index) => ({ ...photo, src: media.assets[`gallery${index}`]?.url || photo.src }));
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const active = openIndex === null ? null : photos[openIndex];
+  const active = openIndex === null ? null : galleryPhotos[openIndex];
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -55,7 +58,7 @@ function Gallery() {
       <section className="py-20 lg:py-28">
         <div className="container-page">
           <ul className="grid auto-rows-[220px] gap-4 sm:grid-cols-3 lg:auto-rows-[260px]">
-            {photos.map((p, i) => (
+            {galleryPhotos.map((p, i) => (
               <Reveal key={p.caption} as="li" delay={(i % 3) * 70} className={p.span}>
                 <button
                   type="button"

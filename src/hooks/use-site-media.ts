@@ -22,6 +22,8 @@ export function useSiteMedia() {
     about: assets.about?.url || MEDIA_DEFAULTS.about,
     directions: assets.directions?.url || MEDIA_DEFAULTS.directions,
     logo: assets.logo?.url || MEDIA_DEFAULTS.logo,
+    founder: assets.founder?.url || MEDIA_DEFAULTS.founder,
+    audio: assets.sermonAudio?.url || "",
     assets,
   };
 }
