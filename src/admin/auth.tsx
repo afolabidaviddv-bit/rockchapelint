@@ -32,8 +32,8 @@ export const supabaseConfigured = Boolean(
   typeof import.meta !== "undefined" && import.meta.env?.["VITE_SUPABASE_URL"],
 );
 
-const DEMO_EMAIL = "admin@rockchapelinternational.org";
-const DEMO_PASSWORD = "rockchapel";
+export const DEMO_EMAIL = "okeolatunde60@gmail.com";
+const DEMO_PASSWORD = "Rockchapel";
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 

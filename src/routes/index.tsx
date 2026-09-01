@@ -16,8 +16,8 @@ import { SectionTitle } from "@/components/SectionTitle";
 import { SurfaceCard, ImageCard } from "@/components/Cards";
 import { EventCard, SermonCard, TestimonialCard } from "@/components/ContentCards";
 import { StatCounter } from "@/components/StatCounter";
-const heroImg = "https://images.unsplash.com/photo-1507692049790-de58290a4334?auto=format&fit=crop&w=1920&q=85";
-const sanctuaryImg = "https://images.unsplash.com/photo-1438032005730-c779502df39b?auto=format&fit=crop&w=1400&q=85";
+const heroImg = "";
+const sanctuaryImg = "";
 
 export const Route = createFileRoute("/")({
   head: () =>
