@@ -1,4 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
+import { supabaseConfigured } from "@/admin/auth";
 
 export const MEDIA_BUCKET = "site-media";
 export const MEDIA_DEFAULTS = {
@@ -14,11 +15,13 @@ export type MediaAsset = { key: string; label: string; kind: MediaKind; url: str
 const mediaTable = () => (supabase as any).from("media_assets");
 
 export async function getMediaAsset(key: string): Promise<MediaAsset | null> {
+  if (!supabaseConfigured) return null;
   const { data } = await mediaTable().select("key,label,kind,url,alt_text").eq("key", key).maybeSingle();
   return (data as MediaAsset | null) ?? null;
 }
 
 export async function getMediaAssets(): Promise<MediaAsset[]> {
+  if (!supabaseConfigured) return [];
   const { data } = await mediaTable().select("key,label,kind,url,alt_text").order("label");
   return (data as MediaAsset[] | null) ?? [];
 }

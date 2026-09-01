@@ -1,13 +1,20 @@
 import { useEffect, useState } from "react";
 import { getMediaAssets, MEDIA_DEFAULTS, type MediaAsset } from "@/admin/media";
+import { supabaseConfigured } from "@/admin/auth";
 
 export function useSiteMedia() {
   const [assets, setAssets] = useState<Record<string, MediaAsset>>({});
   useEffect(() => {
     let active = true;
-    void getMediaAssets().then((rows) => {
-      if (active) setAssets(Object.fromEntries(rows.map((row) => [row.key, row])));
-    });
+    if (supabaseConfigured) {
+      void getMediaAssets()
+        .then((rows) => {
+          if (active) setAssets(Object.fromEntries(rows.map((row) => [row.key, row])));
+        })
+        .catch(() => {
+          if (active) setAssets({});
+        });
+    }
     return () => { active = false; };
   }, []);
   return {
