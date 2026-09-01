@@ -16,8 +16,9 @@ import { SectionTitle } from "@/components/SectionTitle";
 import { SurfaceCard, ImageCard } from "@/components/Cards";
 import { EventCard, SermonCard, TestimonialCard } from "@/components/ContentCards";
 import { StatCounter } from "@/components/StatCounter";
-const heroImg = "";
-const sanctuaryImg = "";
+const heroImg = "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=1600&q=80";
+const sanctuaryImg = "https://images.unsplash.com/photo-1548625361-1934e6c986eb?auto=format&fit=crop&w=1200&q=80";
+const locationBannerImg = "https://images.unsplash.com/photo-1445445290350-18a3b86e0b5b?auto=format&fit=crop&w=1200&q=80";
 
 export const Route = createFileRoute("/")({
   head: () =>
@@ -40,7 +41,7 @@ function Home() {
           alt="Congregation worshipping with raised hands as golden light streams through the windows"
           width={1920}
           height={1080}
-          className="absolute inset-0 size-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover"
         />
         <div
           aria-hidden="true"
@@ -332,13 +333,14 @@ function Home() {
             </Reveal>
           </div>
           <Reveal delay={80}>
-            <iframe
-              title="Map showing Rock Chapel International"
-              src={`https://www.google.com/maps?q=${encodeURIComponent(site.mapQuery)}&output=embed`}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="h-80 w-full rounded-3xl border border-border/60 shadow-soft"
-            />
+            <div className="relative h-80 overflow-hidden rounded-3xl border border-border/60 shadow-soft">
+              <img src={locationBannerImg} alt="Road leading toward the church community" className="h-full w-full object-cover" loading="lazy" />
+              <div className="absolute inset-0 bg-navy/45" aria-hidden="true" />
+              <div className="absolute inset-x-5 bottom-5 text-primary-foreground">
+                <p className="text-sm font-medium">No. 10 Ajibade Street, BCGA</p>
+                <p className="mt-1 text-xs text-primary-foreground/80">Osogbo, Osun State</p>
+              </div>
+            </div>
           </Reveal>
         </div>
       </section>
