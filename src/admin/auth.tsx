@@ -26,7 +26,11 @@ interface AuthContextValue {
   backend: "supabase";
 }
 
-export const supabaseConfigured = Boolean(import.meta.env?.VITE_SUPABASE_URL && import.meta.env?.VITE_SUPABASE_PUBLISHABLE_KEY);
+const env = import.meta.env as Record<string, string | undefined>;
+export const supabaseConfigured = Boolean(
+  (env.VITE_SUPABASE_URL || env.NEXT_PUBLIC_SUPABASE_URL || env.SUPABASE_URL) &&
+    (env.VITE_SUPABASE_PUBLISHABLE_KEY || env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || env.NEXT_PUBLIC_SUPABASE_ANON_KEY || env.SUPABASE_PUBLISHABLE_KEY),
+);
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
@@ -35,6 +39,10 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!supabaseConfigured) {
+      setLoading(false);
+      return;
+    }
     let mounted = true;
     void supabase.auth.getUser().then(({ data }) => {
       if (mounted && data.user) setUser({ id: data.user.id, email: data.user.email ?? "", name: data.user.user_metadata?.full_name ?? "Church Administrator", role: "admin" });
@@ -49,12 +57,17 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const signIn = useCallback(async (email: string, password: string) => {
+    if (!supabaseConfigured) throw new Error("Supabase is not configured for this preview.");
     const { data, error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
     if (error || !data.user) throw new Error(error?.message ?? "Invalid email or password.");
     setUser({ id: data.user.id, email: data.user.email ?? email.trim(), name: data.user.user_metadata?.full_name ?? "Church Administrator", role: "admin" });
   }, []);
 
   const signOut = useCallback(async () => {
+    if (!supabaseConfigured) {
+      setUser(null);
+      return;
+    }
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
     setUser(null);
