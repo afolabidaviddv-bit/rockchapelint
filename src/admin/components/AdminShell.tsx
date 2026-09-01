@@ -121,7 +121,7 @@ export function AdminShell({
   onSearchChange?: (value: string) => void;
 }) {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { user, signOut, backend } = useAdminAuth();
+  const { user, signOut } = useAdminAuth();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const navigate = useNavigate();
 
@@ -136,7 +136,7 @@ export function AdminShell({
         <SidebarBrand />
         <SidebarLinks />
         <div className="border-t border-primary-foreground/10 px-5 py-4 text-xs text-primary-foreground/50">
-          {backend === "supabase" ? "Connected to Cloud" : "Local preview data"}
+          Local browser data
         </div>
       </aside>
 
@@ -212,7 +212,6 @@ export function AdminShell({
             <DropdownMenuContent align="end" className="w-60">
               <DropdownMenuLabel className="flex flex-col gap-1">
                 <span>{user?.name}</span>
-                <span className="text-xs font-normal text-muted-foreground">{user?.email}</span>
                 <Badge variant="secondary" className="mt-1 w-fit">
                   Administrator
                 </Badge>

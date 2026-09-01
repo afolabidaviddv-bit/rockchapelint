@@ -1,8 +1,6 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from "react";
 
-/** Supabase-backed admin authentication. Authorization must be enforced server-side/RLS. */
-
+/** Local demo authentication. Credentials are checked only in this client-side provider. */
 export interface AdminUser {
   id: string;
   email: string;
@@ -15,58 +13,23 @@ interface AuthContextValue {
   loading: boolean;
   signIn: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
-  backend: "supabase" | "local";
+  backend: "local";
 }
-
-export const supabaseConfigured = true;
 
 const ADMIN_EMAIL = "okeolatunde60@gmail.com";
-
-function toAdminUser(user: { id: string; email?: string | null; user_metadata?: { full_name?: string } | null }): AdminUser | null {
-  if (!user.email) return null;
-  return { id: user.id, email: user.email, name: user.user_metadata?.full_name ?? "Church Administrator", role: "admin" };
-}
-
+const ADMIN_PASSWORD = "Rockchapel";
 const AuthContext = createContext<AuthContextValue | null>(null);
 
 export function AdminAuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<AdminUser | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    let mounted = true;
-    void supabase.auth.getSession().then(({ data }) => {
-      if (mounted) {
-        setUser(data.session?.user ? toAdminUser(data.session.user) : null);
-        setLoading(false);
-      }
-    });
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ? toAdminUser(session.user) : null);
-      setLoading(false);
-    });
-    return () => { mounted = false; listener.subscription.unsubscribe(); };
-  }, []);
-
   const signIn = useCallback(async (email: string, password: string) => {
-    const normalized = email.trim().toLowerCase();
-    const { data, error } = await supabase.auth.signInWithPassword({ email: normalized, password });
-    if (error || !data.user || normalized !== ADMIN_EMAIL && !data.user.user_metadata?.is_admin) {
+    if (email.trim().toLowerCase() !== ADMIN_EMAIL || password !== ADMIN_PASSWORD) {
       throw new Error("Invalid email or password.");
     }
-    setUser(toAdminUser(data.user));
+    setUser({ id: "local-admin", email: ADMIN_EMAIL, name: "Church Administrator", role: "admin" });
   }, []);
-
-  const signOut = useCallback(async () => {
-    await supabase.auth.signOut();
-    setUser(null);
-  }, []);
-
-  const value = useMemo<AuthContextValue>(
-    () => ({ user, loading, signIn, signOut, backend: supabaseConfigured ? "supabase" : "local" }),
-    [user, loading, signIn, signOut],
-  );
-
+  const signOut = useCallback(async () => setUser(null), []);
+  const value = useMemo(() => ({ user, loading: false, signIn, signOut, backend: "local" as const }), [user, signIn, signOut]);
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 

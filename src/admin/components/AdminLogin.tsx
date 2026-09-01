@@ -6,13 +6,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { adminAccountEmail, useAdminAuth } from "@/admin/auth";
+import { useAdminAuth } from "@/admin/auth";
 
 export function AdminLogin({ redirectTo = "/admin" }: { redirectTo?: string }) {
-  const { signIn, backend } = useAdminAuth();
+  const { signIn } = useAdminAuth();
   const navigate = useNavigate();
-  const [email, setEmail] = useState(adminAccountEmail);
-  const [password, setPassword] = useState("Rockchapel");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -55,9 +55,7 @@ export function AdminLogin({ redirectTo = "/admin" }: { redirectTo?: string }) {
         </div>
         <p className="flex items-center gap-2 text-xs text-primary-foreground/50">
           <ShieldCheck className="size-4" />
-          {backend === "supabase"
-            ? "Secured by Lovable Cloud authentication"
-            : "Authentication layer ready for Lovable Cloud"}
+          Local administrator access is protected on this device.
         </p>
       </div>
 
@@ -123,10 +121,6 @@ export function AdminLogin({ redirectTo = "/admin" }: { redirectTo?: string }) {
             </Button>
           </form>
 
-          <div className="mt-6 rounded-xl bg-muted px-4 py-3 text-xs text-muted-foreground">
-            <p className="font-medium text-foreground">Primary administrator</p>
-            <p className="mt-1">{adminAccountEmail}</p>
-          </div>
 
           <p className="mt-6 text-center text-xs text-muted-foreground">
             <Link to="/" className="underline underline-offset-4 hover:text-navy">
