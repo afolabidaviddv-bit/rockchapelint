@@ -1,6 +1,5 @@
-import { createFileRoute, Outlet, useRouterState } from "@tanstack/react-router";
-import { AdminAuthProvider, useAdminAuth } from "@/admin/auth";
-import { AdminLogin } from "@/admin/components/AdminLogin";
+import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { AdminAuthProvider } from "@/admin/auth";
 
 export const Route = createFileRoute("/admin")({
   ssr: false,
@@ -18,24 +17,6 @@ export const Route = createFileRoute("/admin")({
 });
 
 function AdminGate() {
-  const { user, loading } = useAdminAuth();
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const isLoginRoute = pathname.startsWith("/admin/login");
-
-  if (loading) {
-    return (
-      <div className="grid min-h-dvh place-items-center bg-muted/40">
-        <div className="flex flex-col items-center gap-3">
-          <span className="size-8 animate-spin rounded-full border-2 border-navy/20 border-t-gold" />
-          <p className="text-sm text-muted-foreground">Loading admin portal…</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (isLoginRoute) return <Outlet />;
-  if (!user) return <AdminLogin />;
-
   return <Outlet />;
 }
 
