@@ -11,8 +11,8 @@ import { adminAccountEmail, useAdminAuth } from "@/admin/auth";
 export function AdminLogin({ redirectTo = "/admin" }: { redirectTo?: string }) {
   const { signIn, backend } = useAdminAuth();
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState(adminAccountEmail);
+  const [password, setPassword] = useState("Rockchapel");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -106,7 +106,10 @@ export function AdminLogin({ redirectTo = "/admin" }: { redirectTo?: string }) {
             </div>
 
             {error ? (
-              <p className="rounded-xl bg-destructive/10 px-4 py-3 text-sm text-destructive" role="alert">
+              <p
+                className="rounded-xl bg-destructive/10 px-4 py-3 text-sm text-destructive"
+                role="alert"
+              >
                 {error}
               </p>
             ) : null}
