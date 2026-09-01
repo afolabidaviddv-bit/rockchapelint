@@ -10,6 +10,7 @@ import {
   Mail,
   Megaphone,
   Menu,
+  Plus,
   Mic2,
   Search,
   Settings as SettingsIcon,
@@ -64,7 +65,10 @@ function SidebarLinks({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   return (
-    <nav className="flex flex-1 flex-col gap-1 overflow-y-auto px-3 pb-6" aria-label="Admin sections">
+    <nav
+      className="flex flex-1 flex-col gap-1 overflow-y-auto px-3 pb-6"
+      aria-label="Admin sections"
+    >
       {adminNav.map((item) => {
         const active = item.exact
           ? pathname === item.to || pathname === `${item.to}/`
@@ -118,6 +122,7 @@ export function AdminShell({
 }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { user, signOut, backend } = useAdminAuth();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
   const navigate = useNavigate();
 
   const handleSignOut = async () => {
@@ -136,7 +141,10 @@ export function AdminShell({
       </aside>
 
       <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-        <SheetContent side="left" className="w-72 border-none bg-navy p-0 [&>button]:text-primary-foreground">
+        <SheetContent
+          side="left"
+          className="w-72 border-none bg-navy p-0 [&>button]:text-primary-foreground"
+        >
           <SheetTitle className="sr-only">Admin navigation</SheetTitle>
           <div className="flex h-full flex-col">
             <SidebarBrand />
@@ -145,7 +153,7 @@ export function AdminShell({
         </SheetContent>
       </Sheet>
 
-      <div className="lg:pl-64">
+      <div className="pb-20 lg:pb-0 lg:pl-64">
         <header className="sticky top-0 z-30 flex h-16 items-center gap-3 border-b border-border/70 bg-background/85 px-4 backdrop-blur-xl sm:px-6">
           <button
             type="button"
@@ -224,8 +232,42 @@ export function AdminShell({
           </DropdownMenu>
         </header>
 
-        <main className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">{children}</main>
+        <main className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+          {children}
+        </main>
       </div>
+
+      <nav
+        className="fixed inset-x-3 bottom-3 z-40 flex items-center justify-around rounded-2xl border border-border/80 bg-background/95 p-2 shadow-lift backdrop-blur-xl lg:hidden"
+        aria-label="Quick admin navigation"
+      >
+        {adminNav.slice(0, 4).map((item) => {
+          const active = item.exact
+            ? pathname === item.to || pathname === `${item.to}/`
+            : pathname.startsWith(item.to);
+          return (
+            <Link
+              key={item.to}
+              to={item.to}
+              aria-current={active ? "page" : undefined}
+              className={cn(
+                "flex min-w-16 flex-col items-center gap-1 rounded-xl px-2 py-2 text-[10px] font-medium transition-colors",
+                active ? "bg-gold/15 text-gold" : "text-muted-foreground",
+              )}
+            >
+              <item.icon className="size-5" />
+              <span>{item.label === "Dashboard" ? "Home" : item.label}</span>
+            </Link>
+          );
+        })}
+        <Link
+          to="/admin/sermons"
+          className="flex min-w-16 flex-col items-center gap-1 rounded-xl bg-navy px-2 py-2 text-[10px] font-medium text-primary-foreground shadow-soft"
+        >
+          <Plus className="size-5" />
+          <span>Add new</span>
+        </Link>
+      </nav>
     </div>
   );
 }
