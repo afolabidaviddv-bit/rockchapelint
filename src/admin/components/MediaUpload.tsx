@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { ImageIcon, Loader2, Trash2, UploadCloud, FileAudio } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
+import { handleImageError } from "@/lib/image-fallback";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { removeMedia, resolveMediaUrl, uploadMedia } from "@/admin/media";
@@ -44,6 +45,7 @@ export function MediaThumb({
   return (
     <img
       src={url}
+      onError={handleImageError}
       alt={alt}
       loading="lazy"
       className={cn("rounded-xl object-cover", className)}
@@ -57,6 +59,8 @@ export function MediaUpload({
   folder = "uploads",
   accept = "image/*",
   label = "image",
+  mediaKey,
+  mediaKind,
   help,
 }: {
   value: string;
@@ -64,6 +68,8 @@ export function MediaUpload({
   folder?: string;
   accept?: string;
   label?: string;
+  mediaKey?: string;
+  mediaKind?: "image" | "audio" | "logo";
   help?: string;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -84,7 +90,9 @@ export function MediaUpload({
       setBusy(true);
       setProgress(10);
       try {
-        const ref = await uploadMedia(file, folder, setProgress);
+        const ref = mediaKey
+          ? await uploadMedia(file, mediaKey, label, mediaKind ?? (isAudioVideo ? "audio" : "image"), setProgress)
+          : await uploadMedia(file, folder, setProgress);
         onChange(ref);
         toast.success("Upload complete");
       } catch {

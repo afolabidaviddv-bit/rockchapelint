@@ -136,7 +136,9 @@ export function RecordForm({
                       onChange={(v) => set(field.name, v)}
                       folder={field.folder ?? "uploads"}
                       accept={field.accept ?? (field.type === "image" ? "image/*" : "audio/*,video/*")}
-                      label={field.type === "image" ? "photo" : "file"}
+                      label={field.label}
+                      mediaKey={field.name}
+                      mediaKind={field.type === "image" ? "image" : "audio"}
                       {...(field.help ? { help: field.help } : {})}
                     />
                   ) : field.type === "richtext" ? (

@@ -4,12 +4,13 @@ import { X } from "lucide-react";
 import { pageMeta } from "@/lib/seo";
 import { PageHeader } from "@/components/PageHeader";
 import { Reveal } from "@/components/Reveal";
-const g1 = "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=900&q=85";
-const g2 = "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=900&q=85";
-const g3 = "https://images.unsplash.com/photo-1504150558240-0b4fd8946624?auto=format&fit=crop&w=900&q=85";
-const g4 = "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=85";
-const hero = "https://images.unsplash.com/photo-1507692049790-de58290a4334?auto=format&fit=crop&w=1920&q=85";
-const sanctuary = "https://images.unsplash.com/photo-1438032005730-c779502df39b?auto=format&fit=crop&w=1400&q=85";
+import { handleImageError } from "@/lib/image-fallback";
+const g1 = "";
+const g2 = "";
+const g3 = "";
+const g4 = "";
+const hero = "";
+const sanctuary = "";
 
 export const Route = createFileRoute("/gallery")({
   head: () =>
@@ -62,7 +63,7 @@ function Gallery() {
                   aria-label={`View larger: ${p.caption}`}
                   className="zoom-frame group relative block size-full rounded-2xl border border-border/60 shadow-soft"
                 >
-                  <img src={p.src} alt={p.alt} loading="lazy" className="size-full object-cover" />
+                  <img src={p.src} onError={handleImageError} alt={p.alt} loading="lazy" className="h-full w-full object-cover" />
                   <span className="pointer-events-none absolute inset-x-0 bottom-0 bg-linear-to-t from-navy/90 to-transparent p-4 text-left text-sm font-medium text-primary-foreground">
                     {p.caption}
                   </span>
@@ -92,6 +93,7 @@ function Gallery() {
           <figure className="max-h-[85dvh] w-full max-w-4xl" onClick={(e) => e.stopPropagation()}>
             <img
               src={active.src}
+              onError={handleImageError}
               alt={active.alt}
               className="max-h-[75dvh] w-full rounded-2xl object-contain"
             />

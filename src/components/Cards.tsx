@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { handleImageError } from "@/lib/image-fallback";
 
 export function SurfaceCard({
   children,
@@ -46,7 +47,7 @@ export function ImageCard({
       )}
     >
       <div className={cn("w-full", ratio)}>
-        <img src={src} alt={alt} loading="lazy" className="size-full object-cover" />
+        <img src={src} onError={handleImageError} alt={alt} loading="lazy" className="h-full w-full object-cover" />
       </div>
       {title ? (
         <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 bg-linear-to-t from-navy/90 to-transparent p-5">

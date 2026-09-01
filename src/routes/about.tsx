@@ -6,7 +6,7 @@ import { SectionTitle } from "@/components/SectionTitle";
 import { Reveal } from "@/components/Reveal";
 import { SurfaceCard, ImageCard } from "@/components/Cards";
 import { StatCounter } from "@/components/StatCounter";
-const sanctuaryImg = "https://images.unsplash.com/photo-1438032005730-c779502df39b?auto=format&fit=crop&w=1400&q=85";
+const sanctuaryImg = "https://images.unsplash.com/photo-1548625361-1934e6c986eb?auto=format&fit=crop&w=1200&q=80";
 
 export const Route = createFileRoute("/about")({
   head: () =>

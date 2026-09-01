@@ -5,7 +5,8 @@ import { PageHeader } from "@/components/PageHeader";
 import { SectionTitle } from "@/components/SectionTitle";
 import { Reveal } from "@/components/Reveal";
 import { SurfaceCard } from "@/components/Cards";
-const founderImg = "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=900&q=85";
+import { handleImageError } from "@/lib/image-fallback";
+const founderImg = "";
 
 export const Route = createFileRoute("/leadership")({
   head: () =>
@@ -34,6 +35,7 @@ function Leadership() {
           <Reveal className="zoom-frame rounded-3xl border border-border/60 shadow-lift">
             <img
               src={founderImg}
+              onError={handleImageError}
               alt={`Portrait of ${site.founder}`}
               width={1000}
               height={1200}

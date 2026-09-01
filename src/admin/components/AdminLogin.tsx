@@ -9,7 +9,7 @@ import { Card } from "@/components/ui/card";
 import { useAdminAuth } from "@/admin/auth";
 
 export function AdminLogin({ redirectTo = "/admin" }: { redirectTo?: string }) {
-  const { signIn } = useAdminAuth();
+  const { signIn, backend } = useAdminAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -55,7 +55,9 @@ export function AdminLogin({ redirectTo = "/admin" }: { redirectTo?: string }) {
         </div>
         <p className="flex items-center gap-2 text-xs text-primary-foreground/50">
           <ShieldCheck className="size-4" />
-          Local administrator access is protected on this device.
+          {backend === "supabase"
+            ? "Secured by Supabase authentication"
+            : "Secure authentication is unavailable"}
         </p>
       </div>
 
@@ -104,10 +106,7 @@ export function AdminLogin({ redirectTo = "/admin" }: { redirectTo?: string }) {
             </div>
 
             {error ? (
-              <p
-                className="rounded-xl bg-destructive/10 px-4 py-3 text-sm text-destructive"
-                role="alert"
-              >
+              <p className="rounded-xl bg-destructive/10 px-4 py-3 text-sm text-destructive" role="alert">
                 {error}
               </p>
             ) : null}
@@ -120,7 +119,6 @@ export function AdminLogin({ redirectTo = "/admin" }: { redirectTo?: string }) {
               {submitting ? "Signing in…" : "Sign in"}
             </Button>
           </form>
-
 
           <p className="mt-6 text-center text-xs text-muted-foreground">
             <Link to="/" className="underline underline-offset-4 hover:text-navy">

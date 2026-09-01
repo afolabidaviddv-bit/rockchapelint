@@ -4,7 +4,8 @@ import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { toast } from "sonner";
 import { navLinks, site } from "@/lib/site";
 import { Button } from "./Button";
-const logoMark = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1788261279795-VRKNOTEp0yPImkSk2UCTHsoqwe3Ddz.png";
+import { handleImageError } from "@/lib/image-fallback";
+const logoMark = "";
 
 export function Footer() {
   const onSubscribe = (e: FormEvent<HTMLFormElement>) => {
@@ -32,6 +33,7 @@ export function Footer() {
             <div className="flex items-center gap-3">
               <img
                 src={logoMark}
+                onError={handleImageError}
                 alt=""
                 aria-hidden="true"
                 loading="lazy"

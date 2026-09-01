@@ -4,7 +4,8 @@ import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { navLinks, site } from "@/lib/site";
 import { Button } from "./Button";
-const logoMark = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1788261279795-VRKNOTEp0yPImkSk2UCTHsoqwe3Ddz.png";
+import { handleImageError } from "@/lib/image-fallback";
+const logoMark = "";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -40,6 +41,7 @@ export function Navbar() {
         <Link to="/" className="flex min-w-0 items-center gap-3" aria-label={`${site.name} home`}>
           <img
             src={logoMark}
+            onError={handleImageError}
             alt=""
             aria-hidden="true"
             width={40}
