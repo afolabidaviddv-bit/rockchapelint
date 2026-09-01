@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { ImageIcon, Loader2, Trash2, UploadCloud, FileAudio } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
+import { handleImageError } from "@/lib/image-fallback";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { removeMedia, resolveMediaUrl, uploadMedia } from "@/admin/media";
@@ -44,6 +45,7 @@ export function MediaThumb({
   return (
     <img
       src={url}
+      onError={handleImageError}
       alt={alt}
       loading="lazy"
       className={cn("rounded-xl object-cover", className)}

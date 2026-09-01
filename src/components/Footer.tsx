@@ -4,6 +4,7 @@ import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { toast } from "sonner";
 import { navLinks, site } from "@/lib/site";
 import { Button } from "./Button";
+import { handleImageError } from "@/lib/image-fallback";
 const logoMark = "";
 
 export function Footer() {
@@ -32,6 +33,7 @@ export function Footer() {
             <div className="flex items-center gap-3">
               <img
                 src={logoMark}
+                onError={handleImageError}
                 alt=""
                 aria-hidden="true"
                 loading="lazy"
