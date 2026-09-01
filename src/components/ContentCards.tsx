@@ -69,6 +69,7 @@ export function SermonCard({
     date: string;
     duration: string;
     summary: string;
+    media_url?: string;
   };
 }) {
   return (
@@ -82,6 +83,7 @@ export function SermonCard({
       <h3 className="mt-4 text-xl font-semibold text-balance">{sermon.title}</h3>
       <p className="mt-1 text-sm text-gold">{sermon.speaker}</p>
       <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{sermon.summary}</p>
+      {sermon.media_url?.startsWith("http") ? <audio controls preload="metadata" className="mt-5 w-full" aria-label={`Play ${sermon.title}`} src={sermon.media_url} /> : null}
       <div className="mt-6 flex items-center justify-between gap-3">
         <span className="text-xs text-muted-foreground">{sermon.date}</span>
         <Button variant="outline" size="sm" aria-label={`Listen to ${sermon.title}`}>

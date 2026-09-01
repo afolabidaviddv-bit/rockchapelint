@@ -17,9 +17,7 @@ import { SurfaceCard, ImageCard } from "@/components/Cards";
 import { EventCard, SermonCard, TestimonialCard } from "@/components/ContentCards";
 import { StatCounter } from "@/components/StatCounter";
 import { handleImageError } from "@/lib/image-fallback";
-const heroImg = "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=1600&q=80";
-const sanctuaryImg = "https://images.unsplash.com/photo-1548625361-1934e6c986eb?auto=format&fit=crop&w=1200&q=80";
-const locationBannerImg = "https://images.unsplash.com/photo-1445445290350-18a3b86e0b5b?auto=format&fit=crop&w=1200&q=80";
+import { useSiteMedia } from "@/hooks/use-site-media";
 
 export const Route = createFileRoute("/")({
   head: () =>
@@ -33,6 +31,8 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
+  const { homeHero: heroImg, about: sanctuaryImg, directions: locationBannerImg } = useSiteMedia();
+
   return (
     <>
       {/* Hero */}

@@ -59,6 +59,8 @@ export function MediaUpload({
   folder = "uploads",
   accept = "image/*",
   label = "image",
+  mediaKey,
+  mediaKind,
   help,
 }: {
   value: string;
@@ -66,6 +68,8 @@ export function MediaUpload({
   folder?: string;
   accept?: string;
   label?: string;
+  mediaKey?: string;
+  mediaKind?: "image" | "audio" | "logo";
   help?: string;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -86,7 +90,9 @@ export function MediaUpload({
       setBusy(true);
       setProgress(10);
       try {
-        const ref = await uploadMedia(file, folder, setProgress);
+        const ref = mediaKey
+          ? await uploadMedia(file, mediaKey, label, mediaKind ?? (isAudioVideo ? "audio" : "image"), setProgress)
+          : await uploadMedia(file, folder, setProgress);
         onChange(ref);
         toast.success("Upload complete");
       } catch {
