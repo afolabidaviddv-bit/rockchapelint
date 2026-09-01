@@ -6,7 +6,7 @@ import { SectionTitle } from "@/components/SectionTitle";
 import { Reveal } from "@/components/Reveal";
 import { SurfaceCard } from "@/components/Cards";
 import { handleImageError } from "@/lib/image-fallback";
-const founderImg = "";
+import { useSiteMedia } from "@/hooks/use-site-media";
 
 export const Route = createFileRoute("/leadership")({
   head: () =>
@@ -20,6 +20,7 @@ export const Route = createFileRoute("/leadership")({
 });
 
 function Leadership() {
+  const { founder: founderImg } = useSiteMedia();
   const [founder, ...team] = leaders;
 
   return (

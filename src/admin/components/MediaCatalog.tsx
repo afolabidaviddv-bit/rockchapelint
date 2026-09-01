@@ -11,6 +11,11 @@ const defaults = [
   ["about", "About Us", "image", MEDIA_DEFAULTS.about],
   ["directions", "Get Directions", "image", MEDIA_DEFAULTS.directions],
   ["logo", "Header and footer logo", "logo", MEDIA_DEFAULTS.logo],
+  ["founder", "Founder portrait", "image", MEDIA_DEFAULTS.founder],
+  ["gallery1", "Gallery: Sunday worship", "image", MEDIA_DEFAULTS.gallery1],
+  ["gallery2", "Gallery: Worship team", "image", MEDIA_DEFAULTS.gallery2],
+  ["gallery3", "Gallery: Children's church", "image", MEDIA_DEFAULTS.gallery3],
+  ["gallery4", "Gallery: Prayer gathering", "image", MEDIA_DEFAULTS.gallery4],
   ["sermonAudio", "Sermon audio", "audio", ""],
 ] as const;
 

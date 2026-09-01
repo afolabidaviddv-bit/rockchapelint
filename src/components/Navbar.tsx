@@ -5,9 +5,10 @@ import { cn } from "@/lib/utils";
 import { navLinks, site } from "@/lib/site";
 import { Button } from "./Button";
 import { handleImageError } from "@/lib/image-fallback";
-const logoMark = "";
+import { useSiteMedia } from "@/hooks/use-site-media";
 
 export function Navbar() {
+  const { logo: logoMark } = useSiteMedia();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });

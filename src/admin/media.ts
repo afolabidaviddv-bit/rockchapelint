@@ -7,6 +7,11 @@ export const MEDIA_DEFAULTS = {
   about: "https://images.unsplash.com/photo-1548625361-1934e6c986eb?auto=format&fit=crop&w=1200&q=80",
   directions: "https://images.unsplash.com/photo-1445445290350-18a3b86e0b5b?auto=format&fit=crop&w=1200&q=80",
   logo: "https://images.unsplash.com/photo-1548625361-58a2f0f8d7f1?auto=format&fit=crop&w=160&q=80",
+  founder: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=1000&q=80",
+  gallery1: "https://images.unsplash.com/photo-1519491050282-cf00c82424b4?auto=format&fit=crop&w=1200&q=80",
+  gallery2: "https://images.unsplash.com/photo-1507692049790-de58290a4334?auto=format&fit=crop&w=1200&q=80",
+  gallery3: "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=1200&q=80",
+  gallery4: "https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=1200&q=80",
 } as const;
 
 export type MediaKind = "image" | "audio" | "logo";
