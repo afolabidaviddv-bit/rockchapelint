@@ -5,7 +5,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { SectionTitle } from "@/components/SectionTitle";
 import { Reveal } from "@/components/Reveal";
 import { SurfaceCard } from "@/components/Cards";
-import founderImg from "@/assets/founder.jpg";
+const founderImg = "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=900&q=85";
 
 export const Route = createFileRoute("/leadership")({
   head: () =>

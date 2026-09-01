@@ -4,7 +4,7 @@ import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { navLinks, site } from "@/lib/site";
 import { Button } from "./Button";
-import logoMark from "@/assets/logo-mark.png";
+const logoMark = "https://images.unsplash.com/photo-1548625361-58a2f0f8d7f1?auto=format&fit=crop&w=160&q=85";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
