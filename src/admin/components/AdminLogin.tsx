@@ -6,13 +6,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { demoCredentials, useAdminAuth } from "@/admin/auth";
+import { adminAccountEmail, useAdminAuth } from "@/admin/auth";
 
 export function AdminLogin({ redirectTo = "/admin" }: { redirectTo?: string }) {
   const { signIn, backend } = useAdminAuth();
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState(adminAccountEmail);
+  const [password, setPassword] = useState("Rockchapel");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -106,7 +106,10 @@ export function AdminLogin({ redirectTo = "/admin" }: { redirectTo?: string }) {
             </div>
 
             {error ? (
-              <p className="rounded-xl bg-destructive/10 px-4 py-3 text-sm text-destructive" role="alert">
+              <p
+                className="rounded-xl bg-destructive/10 px-4 py-3 text-sm text-destructive"
+                role="alert"
+              >
                 {error}
               </p>
             ) : null}
@@ -121,10 +124,8 @@ export function AdminLogin({ redirectTo = "/admin" }: { redirectTo?: string }) {
           </form>
 
           <div className="mt-6 rounded-xl bg-muted px-4 py-3 text-xs text-muted-foreground">
-            <p className="font-medium text-foreground">Preview credentials</p>
-            <p className="mt-1">
-              {demoCredentials.email} · {demoCredentials.password}
-            </p>
+            <p className="font-medium text-foreground">Primary administrator</p>
+            <p className="mt-1">{adminAccountEmail}</p>
           </div>
 
           <p className="mt-6 text-center text-xs text-muted-foreground">

@@ -1,14 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
-/**
- * Admin authentication layer.
- *
- * Supabase-ready: when Lovable Cloud is connected, replace the three marked
- * blocks below with `supabase.auth.getSession()`,
- * `supabase.auth.signInWithPassword()` and `supabase.auth.signOut()`, and wire
- * `supabase.auth.onAuthStateChange`. The context shape (`user`, `loading`,
- * `signIn`, `signOut`) already matches, so no admin screen changes.
- */
+/** Supabase-backed admin authentication. Authorization must be enforced server-side/RLS. */
 
 export interface AdminUser {
   id: string;
@@ -25,15 +18,14 @@ interface AuthContextValue {
   backend: "supabase" | "local";
 }
 
-const SESSION_KEY = "rc_admin_session_v1";
+export const supabaseConfigured = true;
 
-/** Flips to true automatically once Cloud env vars exist. */
-export const supabaseConfigured = Boolean(
-  typeof import.meta !== "undefined" && import.meta.env?.["VITE_SUPABASE_URL"],
-);
+const ADMIN_EMAIL = "okeolatunde60@gmail.com";
 
-const DEMO_EMAIL = "admin@rockchapelinternational.org";
-const DEMO_PASSWORD = "rockchapel";
+function toAdminUser(user: { id: string; email?: string | null; user_metadata?: { full_name?: string } | null }): AdminUser | null {
+  if (!user.email) return null;
+  return { id: user.id, email: user.email, name: user.user_metadata?.full_name ?? "Church Administrator", role: "admin" };
+}
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
@@ -41,37 +33,32 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<AdminUser | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // 1. Restore session
   useEffect(() => {
-    try {
-      const raw = window.localStorage.getItem(SESSION_KEY);
-      if (raw) setUser(JSON.parse(raw) as AdminUser);
-    } catch {
-      /* ignore */
-    }
-    setLoading(false);
+    let mounted = true;
+    void supabase.auth.getSession().then(({ data }) => {
+      if (mounted) {
+        setUser(data.session?.user ? toAdminUser(data.session.user) : null);
+        setLoading(false);
+      }
+    });
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ? toAdminUser(session.user) : null);
+      setLoading(false);
+    });
+    return () => { mounted = false; listener.subscription.unsubscribe(); };
   }, []);
 
-  // 2. Sign in
   const signIn = useCallback(async (email: string, password: string) => {
-    await new Promise((r) => setTimeout(r, 500));
     const normalized = email.trim().toLowerCase();
-    if (normalized !== DEMO_EMAIL || password !== DEMO_PASSWORD) {
+    const { data, error } = await supabase.auth.signInWithPassword({ email: normalized, password });
+    if (error || !data.user || normalized !== ADMIN_EMAIL && !data.user.user_metadata?.is_admin) {
       throw new Error("Invalid email or password.");
     }
-    const next: AdminUser = {
-      id: "local-admin",
-      email: normalized,
-      name: "Church Administrator",
-      role: "admin",
-    };
-    window.localStorage.setItem(SESSION_KEY, JSON.stringify(next));
-    setUser(next);
+    setUser(toAdminUser(data.user));
   }, []);
 
-  // 3. Sign out
   const signOut = useCallback(async () => {
-    window.localStorage.removeItem(SESSION_KEY);
+    await supabase.auth.signOut();
     setUser(null);
   }, []);
 
@@ -89,4 +76,4 @@ export function useAdminAuth() {
   return ctx;
 }
 
-export const demoCredentials = { email: DEMO_EMAIL, password: DEMO_PASSWORD };
+export const adminAccountEmail = ADMIN_EMAIL;
